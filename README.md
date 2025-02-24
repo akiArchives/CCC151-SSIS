@@ -9,6 +9,8 @@ This project is a simple Student Information System that allows users to manage 
 - Add, edit, delete, and list colleges
 - Search functionality for students, programs, and colleges
 - Data validation and error handling
+- Shortcut key (Escape) to unselect all rows
+- Icons for buttons and windows
 
 ## Installation
 1. Clone the repository or download the source code.
@@ -34,6 +36,7 @@ This project is a simple Student Information System that allows users to manage 
 - `college_handler.py`: Handles CRUD operations for colleges.
 - `csv_handler.py`: Utility functions for reading and writing CSV files.
 - `csv-files/`: Directory where CSV files are stored.
+- `icons/`: Directory where icon files are stored.
 
 ## CSV Files
 The application uses the following CSV files for data storage:
