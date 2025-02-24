@@ -14,6 +14,7 @@ This project is a simple Student Information System that allows users to manage 
 1. Clone the repository or download the source code.
 2. Ensure you have Python installed (version 3.6 or higher).
 3. Install the required dependencies using pip:
+
     ```sh
     pip install pandas pyqt6
     ```
@@ -21,6 +22,7 @@ This project is a simple Student Information System that allows users to manage 
 ## Usage
 1. Navigate to the project directory.
 2. Run the `gui.py` file to start the application:
+
     ```sh
     python gui.py
     ```

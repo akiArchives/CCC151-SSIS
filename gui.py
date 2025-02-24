@@ -10,6 +10,7 @@ from student_handler import add_student, delete_student, update_student, list_st
 from program_handler import add_program, delete_program, update_program, list_programs
 from college_handler import add_college, delete_college, update_college, list_colleges
 
+
 class AddEditStudentDialog(QDialog):
     def __init__(self, parent=None, student_data=None):
         super().__init__(parent)
@@ -69,9 +70,9 @@ class AddEditStudentDialog(QDialog):
                 QMessageBox.warning(self, "Invalid ID Number", "ID Number must be in the format YYYY-NNNN.")
                 return
 
-            # Validate Program Code format (uppercase letters and numbers, 2-10 characters)
-            if not re.match(r"^[A-Z0-9]{2,10}$", program_code):
-                QMessageBox.warning(self, "Invalid Program Code", "Program Code must be 2-10 uppercase letters and numbers (e.g., BSCS, BSIT).")
+            # Validate Program Code format (uppercase, lowercase, and '-')
+            if not re.match(r"^[A-Za-z\-]{2,10}$", program_code):
+                QMessageBox.warning(self, "Invalid Program Code", "Program Code must be 2-10 characters long and can include uppercase, lowercase letters, and '-' (e.g., BSCS, bs-it).")
                 return
 
             # Validate Year Level (must be 1, 2, 3, or 4)
@@ -151,9 +152,9 @@ class AddEditProgramDialog(QDialog):
             name = self.name.text().strip()
             college = self.college.currentText().strip()
 
-            # Validate Program Code format (uppercase letters and numbers, 2-10 characters)
-            if not re.match(r"^[A-Z0-9]{2,10}$", code):
-                QMessageBox.warning(self, "Invalid Program Code", "Program Code must be 2-10 uppercase letters and numbers (e.g., BSCS, BSIT).")
+            # Validate Program Code format (uppercase, lowercase, and '-')
+            if not re.match(r"^[A-Za-z\-]{2,10}$", code):
+                QMessageBox.warning(self, "Invalid Program Code", "Program Code must be 2-10 characters long and can include uppercase, lowercase letters, and '-' (e.g., BSCS, bs-it).")
                 return
 
             # Validate empty fields
@@ -297,6 +298,7 @@ class StudentInformationSystem(QMainWindow):
         self.student_table.setColumnCount(6)
         self.student_table.setHorizontalHeaderLabels(['ID Number', 'First Name', 'Last Name', 'Year Level', 'Gender', 'Program Code'])
         self.student_table.setSortingEnabled(True)  # Enable sorting
+        self.student_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)  # Select entire row
         layout.addWidget(self.student_table)
 
         # Buttons for CRUD operations
@@ -332,6 +334,7 @@ class StudentInformationSystem(QMainWindow):
         self.program_table.setColumnCount(3)
         self.program_table.setHorizontalHeaderLabels(['Code', 'Name', 'College'])
         self.program_table.setSortingEnabled(True)  # Enable sorting
+        self.program_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)  # Select entire row
         layout.addWidget(self.program_table)
 
         # Buttons for CRUD operations
@@ -367,6 +370,7 @@ class StudentInformationSystem(QMainWindow):
         self.college_table.setColumnCount(2)
         self.college_table.setHorizontalHeaderLabels(['Code', 'Name'])
         self.college_table.setSortingEnabled(True)  # Enable sorting
+        self.college_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)  # Select entire row
         layout.addWidget(self.college_table)
 
         # Buttons for CRUD operations
