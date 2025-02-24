@@ -2,6 +2,18 @@ QMainWindow {
     font-family: 'Poppins', sans-serif;
     background-color: #121212; /* Background color */
 }
+
+QPushButton#clearStudentSearchButton,
+QPushButton#clearProgramSearchButton,
+QPushButton#clearCollegeSearchButton {
+    border: none;
+    /* background-image: url('icons/clear.png');
+    background-position: center;*/
+    background-color: transparent; 
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
 QPushButton#saveButton {
     background-color: #00a900;  /* Darker green */
     color: #FFFFFF;
@@ -69,8 +81,6 @@ QLineEdit#collegeNameLine {
     border: 2px solid #292929;
 }
 
-
-
 QLineEdit#studentSearchBar,
 QLineEdit#programSearchBar,
 QLineEdit#collegeSearchBar {
@@ -82,7 +92,6 @@ QLineEdit#collegeSearchBar {
     font-size: 16px;
     margin-bottom: 10px;
 }
-
 
 QLineEdit#studentSearchBar:focus,
 QLineEdit#programSearchBar:focus,
@@ -117,7 +126,6 @@ QTabBar::tab:selected {
 QTabBar::tab:hover {
     background: #1c652a; /* Background color of hovered tab */
     color: #FFFFFF; /* Text color of hovered tab */
-    
 }
 
 QTabBar::tab:!selected {
@@ -131,8 +139,6 @@ QTabBar::tab:!selected:hover {
     border-bottom: 2px solid #1c652a;
     border-radius: none;
 }
-
-
 
 QTableWidget {
     background-color: #121212;
@@ -169,10 +175,4 @@ QHeaderView::section {
     font-weight: bold;
     padding: 8px;
     border: 1px solid #1E1E1E;
-}
-
-QDialog {
-    background-color: #121212;
-    color: #E0E0E0;
-    
 }

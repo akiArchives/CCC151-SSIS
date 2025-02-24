@@ -359,14 +359,25 @@ class StudentInformationSystem(QMainWindow):
     def init_student_tab(self):
         layout = QVBoxLayout(self.student_tab)
 
-        # Search bar
+        # Search bar and Clear Search button
+        search_layout = QHBoxLayout()
         self.student_search_bar = QLineEdit()
         self.student_search_bar.setObjectName("studentSearchBar")
         self.student_search_bar.setPlaceholderText("Search by ID, Name, or Program Code")
         self.student_search_bar.textChanged.connect(self.filter_student_table)
         self.student_search_bar.returnPressed.connect(self.filter_student_table)  # Run search on Enter key press
 
-        layout.addWidget(self.student_search_bar)
+        self.clear_student_search_button = QPushButton("")
+        self.clear_student_search_button.setMinimumHeight(50)
+        self.clear_student_search_button.setMinimumWidth(50)
+        self.clear_student_search_button.setIcon(QIcon("icons/clear.png"))
+        self.clear_student_search_button.setIconSize(QSize(50,50))
+        self.clear_student_search_button.setObjectName("clearStudentSearchButton")
+        self.clear_student_search_button.clicked.connect(self.clear_student_search)
+
+        search_layout.addWidget(self.student_search_bar)
+        search_layout.addWidget(self.clear_student_search_button)
+        layout.addLayout(search_layout)
 
         # Table to display students
         self.student_table = QTableWidget()
@@ -416,13 +427,25 @@ class StudentInformationSystem(QMainWindow):
     def init_program_tab(self):
         layout = QVBoxLayout(self.program_tab)
 
-        # Search bar
+        # Search bar and Clear Search button
+        search_layout = QHBoxLayout()
         self.program_search_bar = QLineEdit()
         self.program_search_bar.setObjectName("programSearchBar")
         self.program_search_bar.setPlaceholderText("Search by Code or Name")
         self.program_search_bar.textChanged.connect(self.filter_program_table)
         self.program_search_bar.returnPressed.connect(self.filter_program_table)  # Run search on Enter key press
-        layout.addWidget(self.program_search_bar)
+
+        self.clear_program_search_button = QPushButton("")
+        self.clear_program_search_button.setMinimumHeight(50)
+        self.clear_program_search_button.setMinimumWidth(50)
+        self.clear_program_search_button.setIcon(QIcon("icons/clear.png"))
+        self.clear_program_search_button.setIconSize(QSize(50,50))
+        self.clear_program_search_button.setObjectName("clearProgramSearchButton")
+        self.clear_program_search_button.clicked.connect(self.clear_program_search)
+
+        search_layout.addWidget(self.program_search_bar)
+        search_layout.addWidget(self.clear_program_search_button)
+        layout.addLayout(search_layout)
 
         # Table to display programs
         self.program_table = QTableWidget()
@@ -470,13 +493,25 @@ class StudentInformationSystem(QMainWindow):
     def init_college_tab(self):
         layout = QVBoxLayout(self.college_tab)
 
-        # Search bar
+        # Search bar and Clear Search button
+        search_layout = QHBoxLayout()
         self.college_search_bar = QLineEdit()
         self.college_search_bar.setObjectName("collegeSearchBar")
         self.college_search_bar.setPlaceholderText("Search by Code or Name")
         self.college_search_bar.textChanged.connect(self.filter_college_table)
         self.college_search_bar.returnPressed.connect(self.filter_college_table)  # Run search on Enter key press
-        layout.addWidget(self.college_search_bar)
+
+        self.clear_college_search_button = QPushButton("")
+        self.clear_college_search_button.setMinimumHeight(50)
+        self.clear_college_search_button.setMinimumWidth(50)
+        self.clear_college_search_button.setIcon(QIcon("icons/clear.png"))
+        self.clear_college_search_button.setIconSize(QSize(50,50))
+        self.clear_college_search_button.setObjectName("clearCollegeSearchButton")
+        self.clear_college_search_button.clicked.connect(self.clear_college_search)
+
+        search_layout.addWidget(self.college_search_bar)
+        search_layout.addWidget(self.clear_college_search_button)
+        layout.addLayout(search_layout)
 
         # Table to display colleges
         self.college_table = QTableWidget()
@@ -521,136 +556,102 @@ class StudentInformationSystem(QMainWindow):
 
         self.refresh_college_table()
 
-    def refresh_student_table(self):
+    def refresh_table(self, table_widget, list_function, search_bar, column_alignments=None):
         try:
             # Disable sorting before refreshing
-            self.student_table.setSortingEnabled(False)
+            table_widget.setSortingEnabled(False)
 
             # Clear the table
-            self.student_table.setRowCount(0)  # Remove all rows
+            table_widget.setRowCount(0)  # Remove all rows
 
-            # Fetch student data
-            students = list_students()
+            # Fetch data
+            data = list_function()
 
             # Set the number of columns and headers
-            self.student_table.setColumnCount(len(students.columns))
-            self.student_table.setHorizontalHeaderLabels(students.columns)
+            table_widget.setColumnCount(len(data.columns))
+            table_widget.setHorizontalHeaderLabels(data.columns)
 
             # Populate the table with data
-            for _, row in students.iterrows():
-                row_position = self.student_table.rowCount()
-                self.student_table.insertRow(row_position)
+            for _, row in data.iterrows():
+                row_position = table_widget.rowCount()
+                table_widget.insertRow(row_position)
                 for col_index, value in enumerate(row):
                     item = QTableWidgetItem(str(value))
-                    if col_index in [0, 3, 4]:  # Center justify 'ID Number' and 'Year Level' columns
-                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-                    self.student_table.setItem(row_position, col_index, item)
+                    if column_alignments and col_index in column_alignments:
+                        item.setTextAlignment(column_alignments[col_index])
+                    table_widget.setItem(row_position, col_index, item)
 
             # Resize columns to fit contents
-            self.student_table.resizeColumnsToContents()
+            table_widget.resizeColumnsToContents()
 
             # Allow columns to stretch to fit the window
-            self.student_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
             # Reapply the search filter
-            self.filter_student_table()
+            self.filter_table(table_widget, search_bar)
 
             # Re-enable sorting after refreshing
-            self.student_table.setSortingEnabled(True)
+            table_widget.setSortingEnabled(True)
 
         except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to refresh student table: {e}")
-    
+            QMessageBox.critical(self, "Error", f"Failed to refresh table: {e}")
+
+    def refresh_student_table(self):
+        self.refresh_table(
+            self.student_table,
+            list_students,
+            self.student_search_bar,
+            column_alignments={0: Qt.AlignmentFlag.AlignCenter, 3: Qt.AlignmentFlag.AlignCenter, 4: Qt.AlignmentFlag.AlignCenter}
+        )
+
     def refresh_program_table(self):
-        try:
-            # Disable sorting before refreshing
-            self.program_table.setSortingEnabled(False)
-
-            self.program_table.setRowCount(0)
-
-            programs = list_programs()
-
-            self.program_table.setColumnCount(len(programs.columns))
-            self.program_table.setHorizontalHeaderLabels(programs.columns)
-
-            for _, row in programs.iterrows():
-                row_position = self.program_table.rowCount()
-                self.program_table.insertRow(row_position)
-                for col_index, value in enumerate(row):
-                    item = QTableWidgetItem(str(value))
-                    if col_index in [0, 2]: 
-                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-                    self.program_table.setItem(row_position, col_index, item)
-            
-            # Resize columns to fit contents
-            self.program_table.resizeColumnsToContents()  
-            
-            # Resize the "Name" column to fit the longest cell
-            name_column_index = programs.columns.get_loc('Name')
-            self.program_table.horizontalHeader().setSectionResizeMode(name_column_index, QHeaderView.ResizeMode.ResizeToContents)
-            
-            # Resize other columns to fit window
-            for col in range(self.program_table.columnCount()):
-                if col != name_column_index:
-                    self.program_table.horizontalHeader().setSectionResizeMode(col, QHeaderView.ResizeMode.Stretch)
-
-            # Reapply the search filter
-            self.filter_program_table()
-
-            # Re-enable sorting after refreshing
-            self.program_table.setSortingEnabled(True)
-
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to refresh program table: {e}")
+        self.refresh_table(
+            self.program_table,
+            list_programs,
+            self.program_search_bar,
+            column_alignments={0: Qt.AlignmentFlag.AlignCenter, 2: Qt.AlignmentFlag.AlignCenter}
+        )
 
     def refresh_college_table(self):
-        try:
-            # Disable sorting before refreshing
-            self.college_table.setSortingEnabled(False)
+        self.refresh_table(
+            self.college_table,
+            list_colleges,
+            self.college_search_bar,
+            column_alignments={0: Qt.AlignmentFlag.AlignCenter}
+        )
 
-            self.college_table.setRowCount(0)
-
-            colleges = list_colleges()
-
-            self.college_table.setColumnCount(len(colleges.columns))
-            self.college_table.setHorizontalHeaderLabels(colleges.columns)
-
-            for _, row in colleges.iterrows():
-                row_position = self.college_table.rowCount()
-                self.college_table.insertRow(row_position)
-                for col_index, value in enumerate(row):
-                    item = QTableWidgetItem(str(value))
-                    if col_index in [0]: 
-                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-                    self.college_table.setItem(row_position, col_index, item)
-            
-            # Resize columns to fit contents
-            self.college_table.resizeColumnsToContents()  
-            
-            # Resize columns to fit window
-            self.college_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  
-            
-            # Reapply the search filter
-            self.filter_college_table()
-
-            # Re-enable sorting after refreshing
-            self.college_table.setSortingEnabled(True)
-
-        except Exception as e:
-            self.filter_college_table()  
-            QMessageBox.critical(self, "Error", f"Failed to refresh college table: {e}")
-
-    def filter_student_table(self):
-        search_text = self.student_search_bar.text().lower()
-        for row in range(self.student_table.rowCount()):
+    def filter_table(self, table_widget, search_bar):
+        search_text = search_bar.text().lower()
+        for row in range(table_widget.rowCount()):
             match = False
-            for col in range(self.student_table.columnCount()):
-                item = self.student_table.item(row, col)
+            for col in range(table_widget.columnCount()):
+                item = table_widget.item(row, col)
                 if item and search_text in item.text().lower():
                     match = True
                     break
-            self.student_table.setRowHidden(row, not match)
-            
+            table_widget.setRowHidden(row, not match)
+
+    def filter_student_table(self):
+        self.filter_table(self.student_table, self.student_search_bar)
+
+    def filter_program_table(self):
+        self.filter_table(self.program_table, self.program_search_bar)
+
+    def filter_college_table(self):
+        self.filter_table(self.college_table, self.college_search_bar)
+
+    def clear_student_search(self):
+        self.student_search_bar.clear()
+        self.filter_student_table()
+
+    def clear_program_search(self):
+        self.program_search_bar.clear()
+        self.filter_program_table()
+
+    def clear_college_search(self):
+        self.college_search_bar.clear()
+        self.filter_college_table()
+
     def open_add_student_dialog(self):
         dialog = AddEditStudentDialog(self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
@@ -690,17 +691,6 @@ class StudentInformationSystem(QMainWindow):
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to delete students: {e}")
         
-    def filter_program_table(self):
-        search_text = self.program_search_bar.text().lower()
-        for row in range(self.program_table.rowCount()):
-            match = False
-            for col in range(self.program_table.columnCount()):
-                item = self.program_table.item(row, col)
-                if item and search_text in item.text().lower():
-                    match = True
-                    break
-            self.program_table.setRowHidden(row, not match) 
-            
     def open_add_program_dialog(self):
         dialog = AddEditProgramDialog(self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
@@ -734,17 +724,6 @@ class StudentInformationSystem(QMainWindow):
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to delete program: {e}") 
                             
-    def filter_college_table(self):
-        search_text = self.college_search_bar.text().lower()
-        for row in range(self.college_table.rowCount()):
-            match = False
-            for col in range(self.college_table.columnCount()):
-                item = self.college_table.item(row, col)
-                if item and search_text in item.text().lower():
-                    match = True
-                    break
-            self.college_table.setRowHidden(row, not match)             
-                
     def open_add_college_dialog(self):
         dialog = AddEditCollegeDialog(self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
