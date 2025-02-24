@@ -291,6 +291,7 @@ class StudentInformationSystem(QMainWindow):
         self.student_search_bar = QLineEdit()
         self.student_search_bar.setPlaceholderText("Search by ID, Name, or Program Code")
         self.student_search_bar.textChanged.connect(self.filter_student_table)
+        self.student_search_bar.returnPressed.connect(self.filter_student_table)  # Run search on Enter key press
         layout.addWidget(self.student_search_bar)
 
         # Table to display students
@@ -331,6 +332,7 @@ class StudentInformationSystem(QMainWindow):
         self.program_search_bar = QLineEdit()
         self.program_search_bar.setPlaceholderText("Search by Code or Name")
         self.program_search_bar.textChanged.connect(self.filter_program_table)
+        self.program_search_bar.returnPressed.connect(self.filter_program_table)  # Run search on Enter key press
         layout.addWidget(self.program_search_bar)
 
         # Table to display programs
@@ -370,6 +372,7 @@ class StudentInformationSystem(QMainWindow):
         self.college_search_bar = QLineEdit()
         self.college_search_bar.setPlaceholderText("Search by Code or Name")
         self.college_search_bar.textChanged.connect(self.filter_college_table)
+        self.college_search_bar.returnPressed.connect(self.filter_college_table)  # Run search on Enter key press
         layout.addWidget(self.college_search_bar)
 
         # Table to display colleges
