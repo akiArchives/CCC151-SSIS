@@ -40,3 +40,34 @@ def write_csv(filename, df):
         df.to_csv(filepath, index=False)
     except Exception as e:
         raise Exception(f"Error writing to {filepath}: {e}")
+
+def add_entry(filename, entry_data):
+    try:
+        df = read_csv(filename)
+        df = pd.concat([df, pd.DataFrame([entry_data])], ignore_index=True)
+        write_csv(filename, df)
+    except Exception as e:
+        raise Exception(f"Error adding entry to {filename}: {e}")
+
+def delete_entry(filename, key_column, key_value):
+    try:
+        df = read_csv(filename)
+        df = df[df[key_column] != key_value]
+        write_csv(filename, df)
+    except Exception as e:
+        raise Exception(f"Error deleting entry from {filename}: {e}")
+
+def update_entry(filename, key_column, key_value, updated_data):
+    try:
+        df = read_csv(filename)
+        for key, value in updated_data.items():
+            df.loc[df[key_column] == key_value, key] = value
+        write_csv(filename, df)
+    except Exception as e:
+        raise Exception(f"Error updating entry in {filename}: {e}")
+
+def list_entries(filename):
+    try:
+        return read_csv(filename)
+    except Exception as e:
+        raise Exception(f"Error listing entries from {filename}: {e}")

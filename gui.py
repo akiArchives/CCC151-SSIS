@@ -1,32 +1,50 @@
 import sys
 import pandas as pd
 import re
+from PyQt6.QtGui import QIcon, QAction, QPixmap, QShortcut, QKeySequence
+from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem,
-    QPushButton, QLineEdit, QLabel, QDialog, QFormLayout, QMessageBox, QComboBox, QTabWidget, QHeaderView
+    QPushButton, QLineEdit, QLabel, QDialog, QFormLayout, QMessageBox, QComboBox, QTabWidget, QHeaderView, QSizePolicy, QSpacerItem
 )
+
 from csv_handler import ensure_csv_files_exist, read_csv
 from student_handler import add_student, delete_student, update_student, list_students
 from program_handler import add_program, delete_program, update_program, list_programs
 from college_handler import add_college, delete_college, update_college, list_colleges
 
 
+
 class AddEditStudentDialog(QDialog):
     def __init__(self, parent=None, student_data=None):
         super().__init__(parent)
         self.setWindowTitle("Add Student" if not student_data else "Edit Student")
+        self.setWindowIcon(QIcon("icons/studentWindowIcon.png"))
         self.student_data = student_data
+ 
+        self.setFixedSize(300, 240)
 
         layout = QFormLayout(self)
 
         self.id_number = QLineEdit()
+        self.id_number.setObjectName("idNumber")
+
         self.first_name = QLineEdit()
+        self.first_name.setObjectName("firstName")
+
         self.last_name = QLineEdit()
+        self.last_name.setObjectName("lastName")
+
         self.year_level = QComboBox()
+        self.year_level.setObjectName("yearLevel")
         self.year_level.addItems(["1", "2", "3", "4"])  # Only valid year levels
+
         self.gender = QComboBox()
+        self.gender.setObjectName("gender")
         self.gender.addItems(["Male", "Female", "Other"])
+
         self.program_code = QComboBox()  # Change to QComboBox
+        self.program_code.setObjectName("programCode")
         self.program_code.setEditable(True)  # Allow typing and searching
 
         # Populate Program Code dropdown with valid codes from Program.csv
@@ -36,16 +54,23 @@ class AddEditStudentDialog(QDialog):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to load programs: {e}")
 
-        layout.addRow("ID Number (YYYY-NNNN):", self.id_number)
+        layout.addRow("ID Number:", self.id_number)
         layout.addRow("First Name:", self.first_name)
         layout.addRow("Last Name:", self.last_name)
         layout.addRow("Year Level:", self.year_level)
         layout.addRow("Gender:", self.gender)
-        layout.addRow("Program Code (e.g., BSCS, BSIT):", self.program_code)
+        layout.addRow("Program Code:", self.program_code)
 
         self.save_button = QPushButton("Save")
+        self.save_button.setFixedWidth(100)
+        self.save_button.setObjectName("saveButton")
+        self.save_button.setMinimumHeight(33)
         self.save_button.clicked.connect(self.save_student)
-        layout.addRow(self.save_button)
+
+        button_layout = QHBoxLayout()
+        button_layout.addStretch()  # Add a spacer item to push the button to the right
+        button_layout.addWidget(self.save_button)
+        layout.addRow(button_layout)
 
         if student_data:
             self.id_number.setText(student_data['ID Number'])
@@ -54,6 +79,11 @@ class AddEditStudentDialog(QDialog):
             self.year_level.setCurrentText(student_data['Year Level'])
             self.gender.setCurrentText(student_data['Gender'])
             self.program_code.setCurrentText(student_data['Program Code'])
+        else:
+            self.id_number.setPlaceholderText("YYYY-NNNN")
+            self.first_name.setPlaceholderText("John")
+            self.last_name.setPlaceholderText("Doe")
+            self.program_code.setPlaceholderText("BSCS")
 
     def save_student(self):
         try:
@@ -120,25 +150,41 @@ class AddEditProgramDialog(QDialog):
     def __init__(self, parent=None, program_data=None):
         super().__init__(parent)
         self.setWindowTitle("Add Program" if not program_data else "Edit Program")
+        self.setWindowIcon(QIcon("icons/programWindowIcon.png"))
         self.program_data = program_data
+ 
+        self.setFixedSize(550, 140)
 
         layout = QFormLayout(self)
 
         self.code = QLineEdit()
-        self.name = QLineEdit()
-        self.college = QComboBox()  # Change to QComboBox for better user experience
+        self.code.setObjectName("programCodeLine")
 
-        # Populate College Code dropdown with valid codes
+        self.name = QLineEdit()
+        self.name.setObjectName("programNameLine")
+
+        self.college = QComboBox()
+        self.college.setObjectName("collegeCodeCombo")
+        self.college.setFixedWidth(75)
+
+        # Populate College dropdown with valid codes from College.csv
         valid_college_codes = ["CCS", "COE", "CASS", "CED", "CSM", "CEBA"]
         self.college.addItems(valid_college_codes)
 
-        layout.addRow("Code (e.g., BSCS, BSIT):", self.code)
+        layout.addRow("Program code:", self.code)
         layout.addRow("Name:", self.name)
         layout.addRow("College:", self.college)
 
         self.save_button = QPushButton("Save")
+        self.save_button.setFixedWidth(100)
+        self.save_button.setObjectName("saveButton")
+        self.save_button.setMinimumHeight(33)
         self.save_button.clicked.connect(self.save_program)
-        layout.addRow(self.save_button)
+
+        button_layout = QHBoxLayout()
+        button_layout.addStretch()  # Add a spacer item to push the button to the right
+        button_layout.addWidget(self.save_button)
+        layout.addRow(button_layout)
 
         if program_data:
             self.code.setText(program_data['Code'])
@@ -154,7 +200,7 @@ class AddEditProgramDialog(QDialog):
 
             # Validate Program Code format (uppercase, lowercase, and '-')
             if not re.match(r"^[A-Za-z\-]{2,10}$", code):
-                QMessageBox.warning(self, "Invalid Program Code", "Program Code must be 2-10 characters long and can include uppercase, lowercase letters, and '-' (e.g., BSCS, bs-it).")
+                QMessageBox.warning(self, "Invalid Program Code", "Program Code must be 2-10 characters long and can include uppercase, lowercase letters, and '-' (e.g., BSCS).")
                 return
 
             # Validate empty fields
@@ -194,19 +240,32 @@ class AddEditCollegeDialog(QDialog):
     def __init__(self, parent=None, college_data=None):
         super().__init__(parent)
         self.setWindowTitle("Add College" if not college_data else "Edit College")
+        self.setWindowIcon(QIcon("icons/collegeWindowIcon.png"))
         self.college_data = college_data
 
         layout = QFormLayout(self)
 
-        self.code = QLineEdit()
-        self.name = QLineEdit()
+        self.setFixedSize(350,110)
 
-        layout.addRow("Code (e.g., CCS, COE, CASS, CED, CSM, CEBA):", self.code)
+        self.code = QLineEdit()
+        self.code.setObjectName("collegeCodeLine")
+
+        self.name = QLineEdit()
+        self.name.setObjectName("collegeNameLine")
+
+        layout.addRow("Code:", self.code)
         layout.addRow("Name:", self.name)
 
         self.save_button = QPushButton("Save")
+        self.save_button.setFixedWidth(100)
+        self.save_button.setObjectName("saveButton")
+        self.save_button.setMinimumHeight(33)
         self.save_button.clicked.connect(self.save_college)
-        layout.addRow(self.save_button)
+
+        button_layout = QHBoxLayout()
+        button_layout.addStretch()  # Add a spacer item to push the button to the right
+        button_layout.addWidget(self.save_button)
+        layout.addRow(button_layout)
 
         if college_data:
             self.code.setText(college_data['Code'])
@@ -255,7 +314,8 @@ class StudentInformationSystem(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Student Information System")
-        self.setGeometry(100, 100, 800, 600)
+        self.setWindowIcon(QIcon("icons/windowIcon.png"))
+        self.setGeometry(100, 100, 900, 600)
         try:
             ensure_csv_files_exist()
         except Exception as e:
@@ -284,14 +344,28 @@ class StudentInformationSystem(QMainWindow):
         self.init_program_tab()
         self.init_college_tab()
 
+        # Add shortcut for unselecting rows
+        self.add_shortcuts()
+
+    def add_shortcuts(self):
+        escape_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Escape), self)
+        escape_shortcut.activated.connect(self.unselect_all_rows)
+
+    def unselect_all_rows(self):
+        self.student_table.clearSelection()
+        self.program_table.clearSelection()
+        self.college_table.clearSelection()
+
     def init_student_tab(self):
         layout = QVBoxLayout(self.student_tab)
 
         # Search bar
         self.student_search_bar = QLineEdit()
+        self.student_search_bar.setObjectName("studentSearchBar")
         self.student_search_bar.setPlaceholderText("Search by ID, Name, or Program Code")
         self.student_search_bar.textChanged.connect(self.filter_student_table)
         self.student_search_bar.returnPressed.connect(self.filter_student_table)  # Run search on Enter key press
+
         layout.addWidget(self.student_search_bar)
 
         # Table to display students
@@ -304,18 +378,32 @@ class StudentInformationSystem(QMainWindow):
         self.student_table.horizontalHeader().setStretchLastSection(True)  # Stretch last section to fit window
         self.student_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
         self.student_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)  # Disable cell editing
+        self.student_table.verticalHeader().setVisible(False)  # Hide row numbers
         layout.addWidget(self.student_table)
 
         # Buttons for CRUD operations
         self.student_button_layout = QHBoxLayout()
+
         self.add_student_button = QPushButton("Add Student")
+        self.add_student_button.setObjectName("addStudentButton")
+        self.add_student_button.setIcon(QIcon("icons/add.png"))
+        self.add_student_button.setIconSize(QSize(16, 16))
         self.add_student_button.clicked.connect(self.open_add_student_dialog)
+
         self.edit_student_button = QPushButton("Edit Student")
+        self.edit_student_button.setObjectName("editStudentButton")
         self.edit_student_button.clicked.connect(self.open_edit_student_dialog)
+        self.edit_student_button.setIcon(QIcon("icons/edit.png"))
+
         self.delete_student_button = QPushButton("Delete Student")
+        self.delete_student_button.setObjectName("deleteStudentButton")
         self.delete_student_button.clicked.connect(self.delete_students)
+        self.delete_student_button.setIcon(QIcon("icons/delete.png"))
+        
         self.refresh_student_button = QPushButton("Refresh List")
+        self.refresh_student_button.setObjectName("refreshStudentButton")
         self.refresh_student_button.clicked.connect(self.refresh_student_table)
+        self.refresh_student_button.setIcon(QIcon("icons/refresh.png"))
 
         self.student_button_layout.addWidget(self.add_student_button)
         self.student_button_layout.addWidget(self.edit_student_button)
@@ -330,6 +418,7 @@ class StudentInformationSystem(QMainWindow):
 
         # Search bar
         self.program_search_bar = QLineEdit()
+        self.program_search_bar.setObjectName("programSearchBar")
         self.program_search_bar.setPlaceholderText("Search by Code or Name")
         self.program_search_bar.textChanged.connect(self.filter_program_table)
         self.program_search_bar.returnPressed.connect(self.filter_program_table)  # Run search on Enter key press
@@ -344,18 +433,31 @@ class StudentInformationSystem(QMainWindow):
         self.program_table.horizontalHeader().setStretchLastSection(True)  # Stretch last section to fit window
         self.program_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
         self.program_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)  # Disable cell editing
+        self.program_table.verticalHeader().setVisible(False)  # Hide row numbers
         layout.addWidget(self.program_table)
 
         # Buttons for CRUD operations
         self.program_button_layout = QHBoxLayout()
         self.add_program_button = QPushButton("Add Program")
+        self.add_program_button.setObjectName("addProgramButton")
         self.add_program_button.clicked.connect(self.open_add_program_dialog)
+        self.add_program_button.setIcon(QIcon("icons/add.png"))
+        self.add_program_button.setIconSize(QSize(16, 16))
+
         self.edit_program_button = QPushButton("Edit Program")
+        self.edit_program_button.setObjectName("editProgramButton")
         self.edit_program_button.clicked.connect(self.open_edit_program_dialog)
+        self.edit_program_button.setIcon(QIcon("icons/edit.png"))
+
         self.delete_program_button = QPushButton("Delete Program")
+        self.delete_program_button.setObjectName("deleteProgramButton")
         self.delete_program_button.clicked.connect(self.delete_program)
+        self.delete_program_button.setIcon(QIcon("icons/delete.png"))
+
         self.refresh_program_button = QPushButton("Refresh List")
+        self.refresh_program_button.setObjectName("refreshProgramButton")
         self.refresh_program_button.clicked.connect(self.refresh_program_table)
+        self.refresh_program_button.setIcon(QIcon("icons/refresh.png"))
 
         self.program_button_layout.addWidget(self.add_program_button)
         self.program_button_layout.addWidget(self.edit_program_button)
@@ -370,6 +472,7 @@ class StudentInformationSystem(QMainWindow):
 
         # Search bar
         self.college_search_bar = QLineEdit()
+        self.college_search_bar.setObjectName("collegeSearchBar")
         self.college_search_bar.setPlaceholderText("Search by Code or Name")
         self.college_search_bar.textChanged.connect(self.filter_college_table)
         self.college_search_bar.returnPressed.connect(self.filter_college_table)  # Run search on Enter key press
@@ -384,18 +487,31 @@ class StudentInformationSystem(QMainWindow):
         self.college_table.horizontalHeader().setStretchLastSection(True)  # Stretch last section to fit window
         self.college_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
         self.college_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)  # Disable cell editing
+        self.college_table.verticalHeader().setVisible(False)  # Hide row numbers
         layout.addWidget(self.college_table)
 
         # Buttons for CRUD operations
         self.college_button_layout = QHBoxLayout()
         self.add_college_button = QPushButton("Add College")
+        self.add_college_button.setObjectName("addCollegeButton")
         self.add_college_button.clicked.connect(self.open_add_college_dialog)
+        self.add_college_button.setIcon(QIcon("icons/add.png"))  # Fix icon assignment
+        self.add_college_button.setIconSize(QSize(16, 16))
+
         self.edit_college_button = QPushButton("Edit College")
+        self.edit_college_button.setObjectName("editCollegeButton")
         self.edit_college_button.clicked.connect(self.open_edit_college_dialog)
+        self.edit_college_button.setIcon(QIcon("icons/edit.png"))
+
         self.delete_college_button = QPushButton("Delete College")
+        self.delete_college_button.setObjectName("deleteCollegeButton")
         self.delete_college_button.clicked.connect(self.delete_college)
+        self.delete_college_button.setIcon(QIcon("icons/delete.png"))
+
         self.refresh_college_button = QPushButton("Refresh List")
+        self.refresh_college_button.setObjectName("refreshCollegeButton")
         self.refresh_college_button.clicked.connect(self.refresh_college_table)
+        self.refresh_college_button.setIcon(QIcon("icons/refresh.png"))
 
         self.college_button_layout.addWidget(self.add_college_button)
         self.college_button_layout.addWidget(self.edit_college_button)
@@ -407,9 +523,11 @@ class StudentInformationSystem(QMainWindow):
 
     def refresh_student_table(self):
         try:
+            # Disable sorting before refreshing
+            self.student_table.setSortingEnabled(False)
+
             # Clear the table
             self.student_table.setRowCount(0)  # Remove all rows
-            self.student_table.setColumnCount(0)  # Remove all columns
 
             # Fetch student data
             students = list_students()
@@ -423,7 +541,10 @@ class StudentInformationSystem(QMainWindow):
                 row_position = self.student_table.rowCount()
                 self.student_table.insertRow(row_position)
                 for col_index, value in enumerate(row):
-                    self.student_table.setItem(row_position, col_index, QTableWidgetItem(str(value)))
+                    item = QTableWidgetItem(str(value))
+                    if col_index in [0, 3, 4]:  # Center justify 'ID Number' and 'Year Level' columns
+                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    self.student_table.setItem(row_position, col_index, item)
 
             # Resize columns to fit contents
             self.student_table.resizeColumnsToContents()
@@ -434,43 +555,89 @@ class StudentInformationSystem(QMainWindow):
             # Reapply the search filter
             self.filter_student_table()
 
+            # Re-enable sorting after refreshing
+            self.student_table.setSortingEnabled(True)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh student table: {e}")
-
+    
     def refresh_program_table(self):
         try:
+            # Disable sorting before refreshing
+            self.program_table.setSortingEnabled(False)
+
             self.program_table.setRowCount(0)
+
             programs = list_programs()
+
+            self.program_table.setColumnCount(len(programs.columns))
+            self.program_table.setHorizontalHeaderLabels(programs.columns)
+
             for _, row in programs.iterrows():
                 row_position = self.program_table.rowCount()
                 self.program_table.insertRow(row_position)
                 for col_index, value in enumerate(row):
-                    self.program_table.setItem(row_position, col_index, QTableWidgetItem(str(value)))
+                    item = QTableWidgetItem(str(value))
+                    if col_index in [0, 2]: 
+                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    self.program_table.setItem(row_position, col_index, item)
             
-            self.program_table.resizeColumnsToContents()  # Resize columns to fit contents
+            # Resize columns to fit contents
+            self.program_table.resizeColumnsToContents()  
             
-            # Resize columns to fit window
-            self.program_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch) 
+            # Resize the "Name" column to fit the longest cell
+            name_column_index = programs.columns.get_loc('Name')
+            self.program_table.horizontalHeader().setSectionResizeMode(name_column_index, QHeaderView.ResizeMode.ResizeToContents)
+            
+            # Resize other columns to fit window
+            for col in range(self.program_table.columnCount()):
+                if col != name_column_index:
+                    self.program_table.horizontalHeader().setSectionResizeMode(col, QHeaderView.ResizeMode.Stretch)
 
             # Reapply the search filter
             self.filter_program_table()
+
+            # Re-enable sorting after refreshing
+            self.program_table.setSortingEnabled(True)
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh program table: {e}")
 
     def refresh_college_table(self):
         try:
+            # Disable sorting before refreshing
+            self.college_table.setSortingEnabled(False)
+
             self.college_table.setRowCount(0)
+
             colleges = list_colleges()
+
+            self.college_table.setColumnCount(len(colleges.columns))
+            self.college_table.setHorizontalHeaderLabels(colleges.columns)
+
             for _, row in colleges.iterrows():
                 row_position = self.college_table.rowCount()
                 self.college_table.insertRow(row_position)
                 for col_index, value in enumerate(row):
-                    self.college_table.setItem(row_position, col_index, QTableWidgetItem(str(value)))
-            self.college_table.resizeColumnsToContents()  # Resize columns to fit contents
-            self.college_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
-            self.filter_college_table()  # Reapply the search filter
+                    item = QTableWidgetItem(str(value))
+                    if col_index in [0]: 
+                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    self.college_table.setItem(row_position, col_index, item)
+            
+            # Resize columns to fit contents
+            self.college_table.resizeColumnsToContents()  
+            
+            # Resize columns to fit window
+            self.college_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  
+            
+            # Reapply the search filter
+            self.filter_college_table()
+
+            # Re-enable sorting after refreshing
+            self.college_table.setSortingEnabled(True)
+
         except Exception as e:
+            self.filter_college_table()  
             QMessageBox.critical(self, "Error", f"Failed to refresh college table: {e}")
 
     def filter_student_table(self):
@@ -610,9 +777,22 @@ class StudentInformationSystem(QMainWindow):
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to delete college: {e}")             
 
+def load_stylesheet(filename):
+    """Load a CSS stylesheet from a file."""
+    try:
+        with open(filename, "r") as file:
+            return file.read()
+    except Exception as e:
+        print(f"Failed to load stylesheet: {e}")
+        return ""
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+
+    stylesheet = load_stylesheet("style.qss")
+    if stylesheet:
+        app.setStyleSheet(stylesheet)
+
     window = StudentInformationSystem()
     window.show()
     sys.exit(app.exec())

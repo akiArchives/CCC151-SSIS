@@ -1,33 +1,18 @@
 import pandas as pd
-from csv_handler import read_csv, write_csv
+from csv_handler import add_entry, delete_entry, update_entry, list_entries
+from program_handler import list_programs
 
 def add_college(college_data):
-    try:
-        df = read_csv('College.csv')
-        df = pd.concat([df, pd.DataFrame([college_data])], ignore_index=True)
-        write_csv('College.csv', df)
-    except Exception as e:
-        raise Exception(f"Error adding college: {e}")
+    add_entry('College.csv', college_data)
 
 def delete_college(college_code):
-    try:
-        df = read_csv('College.csv')
-        df = df[df['Code'] != college_code]
-        write_csv('College.csv', df)
-    except Exception as e:
-        raise Exception(f"Error deleting college: {e}")
+    programs = list_programs()
+    if college_code in programs['College'].values:
+        raise Exception("Cannot delete college: Programs are associated with this college.")
+    delete_entry('College.csv', 'Code', college_code)
 
 def update_college(college_code, updated_data):
-    try:
-        df = read_csv('College.csv')
-        for key, value in updated_data.items():
-            df.loc[df['Code'] == college_code, key] = value
-        write_csv('College.csv', df)
-    except Exception as e:
-        raise Exception(f"Error updating college: {e}")
+    update_entry('College.csv', 'Code', college_code, updated_data)
 
 def list_colleges():
-    try:
-        return read_csv('College.csv')
-    except Exception as e:
-        raise Exception(f"Error listing colleges: {e}")
+    return list_entries('College.csv')
