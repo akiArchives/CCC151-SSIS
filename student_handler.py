@@ -28,6 +28,7 @@ def update_student(student_id, updated_data):
 
 def list_students():
     try:
-        return read_csv('Student.csv')
+        students = read_csv('Student.csv')
+        return students
     except Exception as e:
         raise Exception(f"Error listing students: {e}")

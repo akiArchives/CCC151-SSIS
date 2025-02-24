@@ -3,7 +3,7 @@ import pandas as pd
 import re
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem,
-    QPushButton, QLineEdit, QLabel, QDialog, QFormLayout, QMessageBox, QComboBox, QTabWidget
+    QPushButton, QLineEdit, QLabel, QDialog, QFormLayout, QMessageBox, QComboBox, QTabWidget, QHeaderView
 )
 from csv_handler import ensure_csv_files_exist, read_csv
 from student_handler import add_student, delete_student, update_student, list_students
@@ -299,6 +299,10 @@ class StudentInformationSystem(QMainWindow):
         self.student_table.setHorizontalHeaderLabels(['ID Number', 'First Name', 'Last Name', 'Year Level', 'Gender', 'Program Code'])
         self.student_table.setSortingEnabled(True)  # Enable sorting
         self.student_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)  # Select entire row
+        self.student_table.setSelectionMode(QTableWidget.SelectionMode.MultiSelection)  # Allow multiple selection
+        self.student_table.horizontalHeader().setStretchLastSection(True)  # Stretch last section to fit window
+        self.student_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
+        self.student_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)  # Disable cell editing
         layout.addWidget(self.student_table)
 
         # Buttons for CRUD operations
@@ -308,7 +312,7 @@ class StudentInformationSystem(QMainWindow):
         self.edit_student_button = QPushButton("Edit Student")
         self.edit_student_button.clicked.connect(self.open_edit_student_dialog)
         self.delete_student_button = QPushButton("Delete Student")
-        self.delete_student_button.clicked.connect(self.delete_student)
+        self.delete_student_button.clicked.connect(self.delete_students)
         self.refresh_student_button = QPushButton("Refresh List")
         self.refresh_student_button.clicked.connect(self.refresh_student_table)
 
@@ -335,6 +339,9 @@ class StudentInformationSystem(QMainWindow):
         self.program_table.setHorizontalHeaderLabels(['Code', 'Name', 'College'])
         self.program_table.setSortingEnabled(True)  # Enable sorting
         self.program_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)  # Select entire row
+        self.program_table.horizontalHeader().setStretchLastSection(True)  # Stretch last section to fit window
+        self.program_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
+        self.program_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)  # Disable cell editing
         layout.addWidget(self.program_table)
 
         # Buttons for CRUD operations
@@ -371,6 +378,9 @@ class StudentInformationSystem(QMainWindow):
         self.college_table.setHorizontalHeaderLabels(['Code', 'Name'])
         self.college_table.setSortingEnabled(True)  # Enable sorting
         self.college_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)  # Select entire row
+        self.college_table.horizontalHeader().setStretchLastSection(True)  # Stretch last section to fit window
+        self.college_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
+        self.college_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)  # Disable cell editing
         layout.addWidget(self.college_table)
 
         # Buttons for CRUD operations
@@ -394,13 +404,30 @@ class StudentInformationSystem(QMainWindow):
 
     def refresh_student_table(self):
         try:
-            self.student_table.setRowCount(0)
+            # Clear the table
+            self.student_table.setRowCount(0)  # Remove all rows
+            self.student_table.setColumnCount(0)  # Remove all columns
+
+            # Fetch student data
             students = list_students()
+
+            # Set the number of columns and headers
+            self.student_table.setColumnCount(len(students.columns))
+            self.student_table.setHorizontalHeaderLabels(students.columns)
+
+            # Populate the table with data
             for _, row in students.iterrows():
                 row_position = self.student_table.rowCount()
                 self.student_table.insertRow(row_position)
                 for col_index, value in enumerate(row):
                     self.student_table.setItem(row_position, col_index, QTableWidgetItem(str(value)))
+
+            # Resize columns to fit contents
+            self.student_table.resizeColumnsToContents()
+
+            # Allow columns to stretch to fit the window
+            self.student_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh student table: {e}")
 
@@ -413,6 +440,8 @@ class StudentInformationSystem(QMainWindow):
                 self.program_table.insertRow(row_position)
                 for col_index, value in enumerate(row):
                     self.program_table.setItem(row_position, col_index, QTableWidgetItem(str(value)))
+            self.program_table.resizeColumnsToContents()  # Resize columns to fit contents
+            self.program_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh program table: {e}")
 
@@ -425,6 +454,8 @@ class StudentInformationSystem(QMainWindow):
                 self.college_table.insertRow(row_position)
                 for col_index, value in enumerate(row):
                     self.college_table.setItem(row_position, col_index, QTableWidgetItem(str(value)))
+            self.college_table.resizeColumnsToContents()  # Resize columns to fit contents
+            self.college_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh college table: {e}")
 
@@ -442,11 +473,14 @@ class StudentInformationSystem(QMainWindow):
     def open_add_student_dialog(self):
         dialog = AddEditStudentDialog(self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
-            self.refresh_student_table()             
+            self.refresh_student_table()
+            self.student_table.resizeColumnsToContents()  # Ensure columns are resized after adding a student
+            self.student_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Ensure columns fit window
             
     def open_edit_student_dialog(self):
-        selected_row = self.student_table.currentRow()
-        if selected_row >= 0:
+        selected_rows = self.student_table.selectionModel().selectedRows()
+        if selected_rows:
+            selected_row = selected_rows[0].row()
             try:
                 student_data = {
                     'ID Number': self.student_table.item(selected_row, 0).text(),
@@ -461,16 +495,19 @@ class StudentInformationSystem(QMainWindow):
                     self.refresh_student_table()
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to edit student: {e}")
+        else:
+            QMessageBox.warning(self, "No Selection", "Please select a student to edit.")
 
-    def delete_student(self):
-        selected_row = self.student_table.currentRow()
-        if selected_row >= 0:
+    def delete_students(self):
+        selected_rows = self.student_table.selectionModel().selectedRows()
+        if selected_rows:
             try:
-                student_id = self.student_table.item(selected_row, 0).text()
-                delete_student(student_id)
+                for index in sorted(selected_rows):
+                    student_id = self.student_table.item(index.row(), 0).text()
+                    delete_student(student_id)
                 self.refresh_student_table()
             except Exception as e:
-                QMessageBox.critical(self, "Error", f"Failed to delete student: {e}")
+                QMessageBox.critical(self, "Error", f"Failed to delete students: {e}")
         
     def filter_program_table(self):
             search_text = self.program_search_bar.text().lower()
@@ -489,8 +526,9 @@ class StudentInformationSystem(QMainWindow):
             self.refresh_program_table()     
             
     def open_edit_program_dialog(self):
-        selected_row = self.program_table.currentRow()
-        if selected_row >= 0:
+        selected_rows = self.program_table.selectionModel().selectedRows()
+        if selected_rows:
+            selected_row = selected_rows[0].row()
             try:
                 program_data = {
                     'Code': self.program_table.item(selected_row, 0).text(),
@@ -501,7 +539,9 @@ class StudentInformationSystem(QMainWindow):
                 if dialog.exec() == QDialog.DialogCode.Accepted:
                     self.refresh_program_table()
             except Exception as e:
-                QMessageBox.critical(self, "Error", f"Failed to edit program: {e}")        
+                QMessageBox.critical(self, "Error", f"Failed to edit program: {e}")
+        else:
+            QMessageBox.warning(self, "No Selection", "Please select a program to edit.")        
                 
     def delete_program(self):
         selected_row = self.program_table.currentRow()
@@ -530,8 +570,9 @@ class StudentInformationSystem(QMainWindow):
             self.refresh_college_table()             
                 
     def open_edit_college_dialog(self):
-        selected_row = self.college_table.currentRow()
-        if selected_row >= 0:
+        selected_rows = self.college_table.selectionModel().selectedRows()
+        if selected_rows:
+            selected_row = selected_rows[0].row()
             try:
                 college_data = {
                     'Code': self.college_table.item(selected_row, 0).text(),
@@ -541,7 +582,9 @@ class StudentInformationSystem(QMainWindow):
                 if dialog.exec() == QDialog.DialogCode.Accepted:
                     self.refresh_college_table()
             except Exception as e:
-                QMessageBox.critical(self, "Error", f"Failed to edit college: {e}")             
+                QMessageBox.critical(self, "Error", f"Failed to edit college: {e}")
+        else:
+            QMessageBox.warning(self, "No Selection", "Please select a college to edit.")             
                 
     def delete_college(self):
         selected_row = self.college_table.currentRow()

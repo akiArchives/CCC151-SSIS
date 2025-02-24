@@ -1,15 +1,11 @@
 ID Number,First Name,Last Name,Year Level,Gender,Program Code
-2000-0002,Kim,Gab,2,Other,BSCS
 2023-6734,William,Rodriguez,4,Male,BS AI
 2024-7668,Isaac,Sanders,3,Male,BS GameDev
 2024-7221,Liam,Bryant,4,Female,BSBA-HRM
 2022-1099,Oliver,Jordan,4,Others,BS EnvSci
-2023-5481,Luke,Roberts,4,Female,BSBA-HRM
-2023-9284,Wyatt,Gordon,3,Others,BS Entrepreneurship
-2022-4153,Everly,Martin,4,Others,BS AeroEng
 2023-4015,Zoe,Mitchell,2,Male,BS Bio
 2022-7409,Liam,Jackson,4,Others,BS Math
-2021-7960,Savannah,Lopez,1,Others,BA Filipino
+2021-5769,Violet,Gonzalez,3,Others,BSEd-Sci
 2021-5983,Abigail,Martinez,4,Others,BS Biotech
 2024-7551,Scarlett,Perez,1,Female,BSEE
 2022-9034,Owen,Sanchez,1,Female,BS AI
@@ -37,6 +33,8 @@ ID Number,First Name,Last Name,Year Level,Gender,Program Code
 2022-8402,Harper,Henderson,1,Others,BSMLS
 2023-7391,Theodore,Morales,2,Female,BSN
 2021-5504,Riley,Montgomery,1,Others,BS Entrepreneurship
+2023-1573,Kennedy,Franklin,1,Female,BSEd-SpEd
+2024-6436,Elijah,Jackson,1,Female,BSEd-SpEd
 2023-5683,Caleb,Ortiz,4,Others,BSChE
 2021-7211,Jonathan,Murphy,3,Others,BSPH
 2024-2705,Layla,Ward,1,Male,BS Psych
@@ -47,7 +45,6 @@ ID Number,First Name,Last Name,Year Level,Gender,Program Code
 2024-2009,Landon,Mendoza,4,Others,BPharm
 2022-4557,Luke,Campbell,1,Male,BSEE
 2024-8197,Aaron,Baker,1,Male,BSPT
-2024-9678,Ariana,Bryant,2,Male,BA Filipino
 2022-2576,Daniel,Scott,3,Female,BS Radiology
 2024-6593,Ryan,Ward,1,Others,BSSE
 2022-9298,John,Collins,2,Male,BSEd-Fil
@@ -56,7 +53,6 @@ ID Number,First Name,Last Name,Year Level,Gender,Program Code
 2022-3608,Adrian,Roberts,2,Male,BA DevCom
 2021-9737,Riley,Martin,2,Others,BSRT
 2023-2843,Lily,Ray,1,Others,BS Marine Bio
-2022-3038,Jackson,Phillips,3,Male,BA Filipino
 2022-8929,Noah,Murphy,1,Female,BSRT
 2023-4043,Riley,Webb,1,Others,BS Biotech
 2021-8868,Adrian,Hughes,3,Others,BA Phil
@@ -88,7 +84,6 @@ ID Number,First Name,Last Name,Year Level,Gender,Program Code
 2021-9467,Alexander,Harris,4,Male,BS Psych
 2023-4099,Owen,Rodriguez,3,Male,BSBA-FM
 2021-5717,Nora,Gray,3,Female,BA Phil
-2021-6859,Caleb,Davis,1,Others,BA Filipino
 2021-3991,Hazel,Campbell,4,Male,BSECE
 2021-2000,Grace,Garcia,1,Others,BTLED-IA
 2023-6228,Jackson,Bennet,1,Female,BSEd-Sci
@@ -97,6 +92,8 @@ ID Number,First Name,Last Name,Year Level,Gender,Program Code
 2022-3637,Bella,Jackson,4,Male,BA Journ
 2024-1992,Eva,Cooper,3,Others,BSBA-FM
 2024-1116,Gabriel,Adams,1,Male,BSBA-MM
+2023-9111,Hunter,Ortiz,1,Male,BSEd-SpEd
+2023-9237,Ella,Wright,4,Others,BSEd-SpEd
 2023-9109,Valentina,Gomez,2,Female,BS AeroEng
 2024-7417,Brooklyn,Phillips,4,Others,BPharm
 2023-2868,David,Smith,3,Others,BS Public Ad
@@ -128,6 +125,7 @@ ID Number,First Name,Last Name,Year Level,Gender,Program Code
 2024-6285,David,Marshall,2,Others,BS DataSci
 2021-5269,Jackson,Davis,3,Female,BA Comm
 2022-2497,Mia,Adams,3,Female,BS Econ
+2021-3262,Naomi,Reed,1,Male,BSEd-SpEd
 2022-4952,Hailey,Carter,2,Others,BSChE
 2024-5428,Kennedy,Murphy,2,Others,BA SocSci
 2022-9118,Maya,Harrison,2,Female,BSN Midwifery
@@ -143,9 +141,11 @@ ID Number,First Name,Last Name,Year Level,Gender,Program Code
 2024-9905,Lily,Gonzalez,4,Male,BSCE
 2023-4671,Riley,Cox,3,Male,BSEd-Fil
 2022-8319,Kennedy,Carter,2,Others,BSBA-OM
+2023-9338,Hannah,Smith,2,Others,BSEd-SpEd
 2022-2443,Ella,Turner,3,Male,BS DataSci
 2023-5584,Stella,Ortiz,3,Female,BSBA-IB
 2024-4674,Cameron,Jenkins,1,Male,BSEd-Fil
+2024-4624,Noah,Warren,1,Male,BSEd-SpEd
 2024-8807,David,Sanders,4,Male,BTLED-IA
 2021-5924,Hailey,Martin,4,Male,BSEd-SocSci
 2021-3486,Valentina,Taylor,2,Female,BS Biotech
@@ -157,7 +157,6 @@ ID Number,First Name,Last Name,Year Level,Gender,Program Code
 2021-6672,Grace,Cook,4,Female,BSBA-MM
 2022-9466,Josiah,Gray,3,Male,BS Applied Physics
 2023-3491,Bella,Fisher,2,Others,BSOT
-2022-2862,Aiden,Rogers,2,Male,BA Filipino
 2023-4507,Skylar,Cunningham,3,Female,BSEMC
 2023-4059,Isabella,Lewis,2,Others,BS Marine Bio
 2024-2489,Hailey,Taylor,3,Others,BSRT
@@ -192,5 +191,59 @@ ID Number,First Name,Last Name,Year Level,Gender,Program Code
 2024-6666,Lucas,Davis,4,Female,BSBA-MM
 2024-1753,Nora,Howard,4,Female,BSN Midwifery
 2022-2391,Nora,Lee,1,Male,BSGE
-2023-0957,Joaquin Mikel,Ermita,2,Male,BSCS
-2021-0012,Jann Lloyd,Alison,3,Female,BSIT
+2021-5517,Naomi,Franklin,2,Female,BSChE
+2021-1781,Olivia,Johnson,1,Others,BSEE
+2023-4402,Lillian,Taylor,1,Others,BS Stat
+2023-7226,Sebastian,Adams,3,Others,BSBA-OM
+2021-1366,Grace,Cunningham,3,Male,BA Phil
+2021-8346,Aiden,Williams,3,Female,BS Applied Physics
+2021-7953,Paisley,Green,2,Female,BS Biotech
+2022-5783,Chloe,Gordon,2,Male,BS Geology
+2021-5599,Harper,Edwards,1,Male,BTLED-HE
+2022-4166,Aaron,Graham,4,Male,BS Public Ad
+2021-4785,James,Chavez,4,Others,BSEd-SocSci
+2021-2639,Scarlett,Bailey,1,Female,BS Econ
+2023-5256,Autumn,Bailey,4,Others,BSEd-Eng
+2021-4280,Thomas,Stewart,2,Others,BSChE
+2023-8141,Amelia,Chavez,3,Male,BS Chem
+2024-2413,Benjamin,Elliott,1,Others,BSOT
+2023-4175,Julian,Ross,1,Male,BSEE
+2024-4711,Brayden,Harrison,3,Female,BSN
+2022-3258,Alice,Reyes,4,Others,BSPT
+2024-5215,Matthew,Robinson,2,Others,BS CyberSec
+2023-7883,Lucy,Williams,2,Others,BSBA-HRM
+2022-8770,Matthew,Mitchell,2,Male,BSDA
+2023-7111,Wyatt,Cook,2,Female,BS Finance
+2021-8082,Ethan,Ramos,2,Others,BS Math
+2024-1469,Luna,Miller,1,Female,BSEMC
+2022-5340,Violet,Thomas,1,Male,BSMLS
+2024-6514,Ethan,Miller,3,Others,BA Eng
+2022-9066,Ella,Adams,4,Others,BS CyberSec
+2023-4560,Chloe,Nelson,1,Female,BSEd-SocSci
+2021-1374,Oliver,McDonald,1,Female,BSEE
+2024-7916,Hudson,Campbell,2,Others,BSEd-PE
+2024-9119,Brayden,Silva,1,Others,BS Radiology
+2023-1708,Amelia,Fisher,3,Others,BS AeroEng
+2024-2741,Paisley,Myers,4,Others,BSEd-SocSci
+2024-9180,Melody,White,1,Male,BA Hist
+2021-5305,Wyatt,Ward,1,Others,BSMLS
+2024-9583,Bella,Young,3,Male,BSMLS
+2021-3892,Adam,Brooks,2,Others,BS Chem
+2024-3291,John,Rogers,2,Male,BSChE
+2023-5252,Maya,McDonald,4,Male,BA Comm
+2022-8885,Ella,Cooper,3,Female,BS Econ
+2021-7338,Thomas,Cunningham,3,Male,BS Econ
+2023-6236,Charlotte,Cook,2,Others,BTLED-IA
+2023-8995,Andrew,Ramirez,1,Female,BA DevCom
+2022-3809,Hailey,Sanchez,4,Female,BSRT
+2021-8905,Henry,Montgomery,2,Female,BSDA
+2023-7597,Lucy,Hall,4,Female,BA SocSci
+2021-1334,Michael,Cook,3,Male,BSPT
+2021-1524,Amelia,Collins,1,Female,BSEd-Math
+1999-1999,Aku Ay,Filipino,1,Male,BSRE
+2005-0423,Wakin,Sallador,2,Male,BSCS
+2023-0001,Jesus,Derotas,4,Male,BSME
+2024-0123,King,Kong,1,Male,BSEd-Fil
+2021-0999,Michael,Cera,1,Male,BSRE
+2024-0003,Rene Jr.,Estrella,1,Other,BSIT
+2021-2023,Juhanara,Aranahuj,4,Female,BSDA
