@@ -431,6 +431,9 @@ class StudentInformationSystem(QMainWindow):
             # Allow columns to stretch to fit the window
             self.student_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
+            # Reapply the search filter
+            self.filter_student_table()
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh student table: {e}")
 
@@ -443,8 +446,15 @@ class StudentInformationSystem(QMainWindow):
                 self.program_table.insertRow(row_position)
                 for col_index, value in enumerate(row):
                     self.program_table.setItem(row_position, col_index, QTableWidgetItem(str(value)))
+            
             self.program_table.resizeColumnsToContents()  # Resize columns to fit contents
-            self.program_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
+            
+            # Resize columns to fit window
+            self.program_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch) 
+
+            # Reapply the search filter
+            self.filter_program_table()
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh program table: {e}")
 
@@ -459,6 +469,7 @@ class StudentInformationSystem(QMainWindow):
                     self.college_table.setItem(row_position, col_index, QTableWidgetItem(str(value)))
             self.college_table.resizeColumnsToContents()  # Resize columns to fit contents
             self.college_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Resize columns to fit window
+            self.filter_college_table()  # Reapply the search filter
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh college table: {e}")
 
@@ -513,15 +524,15 @@ class StudentInformationSystem(QMainWindow):
                 QMessageBox.critical(self, "Error", f"Failed to delete students: {e}")
         
     def filter_program_table(self):
-            search_text = self.program_search_bar.text().lower()
-            for row in range(self.program_table.rowCount()):
-                match = False
-                for col in range(self.program_table.columnCount()):
-                    item = self.program_table.item(row, col)
-                    if item and search_text in item.text().lower():
-                        match = True
-                        break
-                self.program_table.setRowHidden(row, not match) 
+        search_text = self.program_search_bar.text().lower()
+        for row in range(self.program_table.rowCount()):
+            match = False
+            for col in range(self.program_table.columnCount()):
+                item = self.program_table.item(row, col)
+                if item and search_text in item.text().lower():
+                    match = True
+                    break
+            self.program_table.setRowHidden(row, not match) 
             
     def open_add_program_dialog(self):
         dialog = AddEditProgramDialog(self)
