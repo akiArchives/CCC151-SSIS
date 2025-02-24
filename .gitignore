@@ -44,3 +44,4 @@ data/*.csv
 data/*.db
 data/*.sqlite
 data/*.json
+theme.qss
