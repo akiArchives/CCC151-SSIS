@@ -34,7 +34,7 @@ BSChE,Bachelor of Science in Chemical Engineering,COE
 BSIE,Bachelor of Science in Industrial Engineering,COE
 BSECE,Bachelor of Science in Electronics and Communications Engineering,COE
 BSRE,Bachelor of Science in Renewable Energy Engineering,COE
-BSGE,Bachelor of Science in Geodetic Engineering,COE
+BSGES,Bachelor of Science in Geodetic Engineering,COE
 BS AeroEng,Bachelor of Science in Aerospace Engineering,COE
 BS NavalEng,Bachelor of Science in Naval Engineering,COE
 BSCS,Bachelor of Science in Computer Science,CCS
@@ -46,7 +46,7 @@ BS CyberSec,Bachelor of Science in Cybersecurity,CCS
 BS AI,Bachelor of Science in Artificial Intelligence,CCS
 BSSE,Bachelor of Science in Software Engineering,CCS
 BS DataSci,Bachelor of Science in Data Science,CCS
-BS GameDev,Bachelor of Science in Game Development,CCS
+BSGDS,Bachelor of Science in Game Development,CCS
 BSBA-FM,Bachelor of Science in Business Administration - Financial Management,CEBA
 BSBA-MM,Bachelor of Science in Business Administration - Marketing Management,CEBA
 BSBA-HRM,Bachelor of Science in Business Administration - Human Resource Management,CEBA

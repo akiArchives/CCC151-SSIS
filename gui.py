@@ -9,9 +9,9 @@ from PyQt6.QtWidgets import (
 )
 
 from csv_handler import ensure_csv_files_exist, read_csv
-from student_handler import add_student, delete_student, update_student, list_students
-from program_handler import add_program, delete_program, update_program, list_programs
-from college_handler import add_college, delete_college, update_college, list_colleges
+from student_handler import *
+from program_handler import *
+from college_handler import *
 
 
 
@@ -223,7 +223,11 @@ class AddEditProgramDialog(QDialog):
 
             # Add or update program
             if self.program_data:
-                update_program(self.program_data['Code'], program_data)
+                old_code = self.program_data['Code']
+                update_program(old_code, program_data)
+                if old_code != code:
+                    update_student_program_code(old_code, code)
+                    
             else:
                 # Check if Code already exists
                 programs = list_programs()
@@ -271,16 +275,18 @@ class AddEditCollegeDialog(QDialog):
             self.code.setText(college_data['Code'])
             self.name.setText(college_data['Name'])
 
+        def convert_to_uppercase(self):
+            self.code.setText(self.code.text().upper())
+
     def save_college(self):
         try:
             # Get input values
             code = self.code.text().strip()
             name = self.name.text().strip()
 
-            # Validate College Code format (e.g., CCS, COE, CASS, CED, CSM, CEBA)
-            valid_college_codes = ["CCS", "COE", "CASS", "CED", "CSM", "CEBA"]
-            if code not in valid_college_codes:
-                QMessageBox.warning(self, "Invalid College Code", f"College Code must be one of: {', '.join(valid_college_codes)}.")
+            # Validate College Code format (all letters, no numbers)
+            if not re.match(r"^[A-Za-z]+$", code):
+                QMessageBox.warning(self, "Invalid College Code", "College Code must consist of all letters and no numbers.")
                 return
 
             # Validate empty fields
@@ -296,7 +302,10 @@ class AddEditCollegeDialog(QDialog):
 
             # Add or update college
             if self.college_data:
-                update_college(self.college_data['Code'], college_data)
+                old_code = self.college_data['Code']
+                update_college(old_code, college_data)
+                if old_code != code:
+                    update_program_college_code(old_code, code)
             else:
                 # Check if Code already exists
                 colleges = list_colleges()
@@ -348,8 +357,8 @@ class StudentInformationSystem(QMainWindow):
         self.add_shortcuts()
 
     def add_shortcuts(self):
-        escape_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Escape), self)
-        escape_shortcut.activated.connect(self.unselect_all_rows)
+        self.escape_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Escape), self)
+        self.escape_shortcut.activated.connect(self.unselect_all_rows)
 
     def unselect_all_rows(self):
         self.student_table.clearSelection()
@@ -558,7 +567,7 @@ class StudentInformationSystem(QMainWindow):
 
     def refresh_table(self, table_widget, list_function, search_bar, column_alignments=None):
         try:
-            # Disable sorting before refreshing
+            # Disable sorting before refreshing (fixed a bug)
             table_widget.setSortingEnabled(False)
 
             # Clear the table
@@ -709,6 +718,7 @@ class StudentInformationSystem(QMainWindow):
                 dialog = AddEditProgramDialog(self, program_data)
                 if dialog.exec() == QDialog.DialogCode.Accepted:
                     self.refresh_program_table()
+                    self.refresh_student_table()
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to edit program: {e}")
         else:
@@ -741,6 +751,7 @@ class StudentInformationSystem(QMainWindow):
                 dialog = AddEditCollegeDialog(self, college_data)
                 if dialog.exec() == QDialog.DialogCode.Accepted:
                     self.refresh_college_table()
+                    self.refresh_program_table()
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to edit college: {e}")
         else:
