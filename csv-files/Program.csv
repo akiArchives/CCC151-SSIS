@@ -1,12 +1,12 @@
 Code,Name,College
-BTLED-HE,Bachelor of Technology and Livelihood Education - Home Economics,CED
-BTLED-IAA,Bachelor of Technology and Livelihood Education - Industrial Arts,CED
-BSED-ENG,Bachelor of Secondary Education - English,CED
-BSED-MATH,Bachelor of Secondary Education - Mathematics,CED
-BSED-SCI,Bachelor of Secondary Education - Science,CED
-BSED-FIL,Bachelor of Secondary Education - Filipino,CED
-BSED-SOCSCI,Bachelor of Secondary Education - Social Science,CED
-BSED-PE,Bachelor of Secondary Education - Physical Education,CED
+BTLED-HE,Bachelor of Technology and Livelihood Education - Home Economics,CASS
+BTLED-IAA,Bachelor of Technology and Livelihood Education - Industrial Arts,CASS
+BSED-ENG,Bachelor of Secondary Education - English,CASS
+BSED-MATH,Bachelor of Secondary Education - Mathematics,CASS
+BSED-SCI,Bachelor of Secondary Education - Science,CASS
+BSED-FIL,Bachelor of Secondary Education - Filipino,CASS
+BSED-SOCSCI,Bachelor of Secondary Education - Social Science,CASS
+BSED-PE,Bachelor of Secondary Education - Physical Education,CASS
 BS PSYCH,Bachelor of Science in Psychology,CASS
 BA SOCSCI,Bachelor of Arts in Social Science,CASS
 BA COMM,Bachelor of Arts in Communication,CASS
@@ -17,16 +17,16 @@ BA FILIPINO,Bachelor of Arts in Filipino,CASS
 BA IR,Bachelor of Arts in International Relations,CASS
 BA DEVCOM,Bachelor of Arts in Development Communication,CASS
 BA JOURN,Bachelor of Arts in Journalism,CASS
-BS MATH,Bachelor of Science in Mathematics,CSM
-BS BIO,Bachelor of Science in Biology,CSM
-BS CHEM,Bachelor of Science in Chemistry,CSM
-BS ENVSCI,Bachelor of Science in Environmental Science,CSM
-BS STAT,Bachelor of Science in Statistics,CSM
-BS APPLIED PHYSICS,Bachelor of Science in Applied Physics,CSM
-BS MARINE BIO,Bachelor of Science in Marine Biology,CSM
-BS GEOLOGY,Bachelor of Science in Geology,CSM
-BS FORENSIC SCI,Bachelor of Science in Forensic Science,CSM
-BS BIOTECH,Bachelor of Science in Biotechnology,CSM
+BS MATH,Bachelor of Science in Mathematics,CASS
+BS BIO,Bachelor of Science in Biology,CASS
+BS CHEM,Bachelor of Science in Chemistry,CASS
+BS ENVSCI,Bachelor of Science in Environmental Science,CASS
+BS STAT,Bachelor of Science in Statistics,CASS
+BS APPLIED PHYSICS,Bachelor of Science in Applied Physics,CASS
+BS MARINE BIO,Bachelor of Science in Marine Biology,CASS
+BS GEOLOGY,Bachelor of Science in Geology,CASS
+BS FORENSIC SCI,Bachelor of Science in Forensic Science,CASS
+BS BIOTECH,Bachelor of Science in Biotechnology,CASS
 BSCE,Bachelor of Science in Civil Engineering,COE
 BSEE,Bachelor of Science in Electrical Engineering,COE
 BSME,Bachelor of Science in Mechanical Engineering,COE

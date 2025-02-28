@@ -1,11 +1,11 @@
 import sys
 import pandas as pd
 import re
-from PyQt6.QtGui import QIcon, QAction, QPixmap, QShortcut, QKeySequence
+from PyQt6.QtGui import QIcon, QShortcut, QKeySequence
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem,
-    QPushButton, QLineEdit, QLabel, QDialog, QFormLayout, QMessageBox, QComboBox, QTabWidget, QHeaderView, QSizePolicy, QSpacerItem
+    QPushButton, QLineEdit, QLabel, QDialog, QFormLayout, QMessageBox, QComboBox, QTabWidget, QHeaderView
 )
 
 from csv_handler import ensure_csv_files_exist, read_csv
@@ -101,7 +101,7 @@ class AddEditStudentDialog(QDialog):
                 return
 
             # Validate Program Code format (uppercase, lowercase, and '-')
-            if not re.match(r"^[A-Za-z\-]{2,10}$", program_code):
+            if not re.match(r"^[A-Za-z\- ]{2,10}$", program_code):
                 QMessageBox.warning(self, "Invalid Program Code", "Program Code must be 2-10 characters long and can include uppercase, lowercase letters, and '-' (e.g., BSCS, bs-it).")
                 return
 
@@ -248,6 +248,11 @@ class AddEditProgramDialog(QDialog):
                     return
                 add_program(program_data)
 
+                if name in programs['Name'].values:
+                    QMessageBox.warning(self, "Duplicate Name", "A program with this Name already exists.")
+                    return
+                add_program(program_data)
+
             self.accept()
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An error occurred: {e}")
@@ -312,12 +317,21 @@ class AddEditCollegeDialog(QDialog):
                 'Name': name
             }
 
+
             # Add or update college
             if self.college_data:
                 old_code = self.college_data['Code']
-                update_college(old_code, college_data)
                 if old_code != code:
+                    # Check if new Code already exists
+                    colleges = list_colleges()
+                    if code in colleges['Code'].values:
+                        QMessageBox.warning(self, "Duplicate Code", "A college with this Code already exists.")
+                        return
+                    update_college(old_code, college_data)
                     update_program_college_code(old_code, code)
+                else:
+                    update_college(old_code, college_data)
+
             else:
                 # Check if Code already exists
                 colleges = list_colleges()
@@ -325,6 +339,13 @@ class AddEditCollegeDialog(QDialog):
                     QMessageBox.warning(self, "Duplicate Code", "A college with this Code already exists.")
                     return
                 add_college(college_data)
+
+                if name in colleges['Name'].values:
+                    QMessageBox.warning(self, "Duplicate Name", "A college with this Name already exists.")
+                    return
+                add_college(college_data)
+
+
 
             self.accept()
         except Exception as e:
@@ -337,6 +358,8 @@ class StudentInformationSystem(QMainWindow):
         self.setWindowTitle("Student Information System")
         self.setWindowIcon(QIcon("icons/windowIcon.png"))
         self.setGeometry(100, 100, 900, 600)
+
+        # Initialize CSV files
         try:
             ensure_csv_files_exist()
         except Exception as e:
@@ -388,6 +411,10 @@ class StudentInformationSystem(QMainWindow):
         self.student_search_bar.textChanged.connect(self.filter_student_table)
         self.student_search_bar.returnPressed.connect(self.filter_student_table)  # Run search on Enter key press
 
+        self.search_by_label = QComboBox()
+        self.search_by_label.setObjectName("searchByLabel")
+        self.search_by_label.addItems(["All", "ID Number", "First Name", "Last Name", "Year Level", "Gender", "Program Code"])
+
         self.clear_student_search_button = QPushButton("")
         self.clear_student_search_button.setMinimumHeight(50)
         self.clear_student_search_button.setMinimumWidth(50)
@@ -397,6 +424,7 @@ class StudentInformationSystem(QMainWindow):
         self.clear_student_search_button.clicked.connect(self.clear_student_search)
 
         search_layout.addWidget(self.student_search_bar)
+        search_layout.addWidget(self.search_by_label)
         search_layout.addWidget(self.clear_student_search_button)
         layout.addLayout(search_layout)
 
@@ -649,7 +677,7 @@ class StudentInformationSystem(QMainWindow):
             table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
             # Reapply the search filter
-            self.filter_table(table_widget, search_bar)
+            self.filter_table(table_widget, search_bar, self.search_by_label)
 
             # Re-enable sorting after refreshing
             table_widget.setSortingEnabled(True)
@@ -681,36 +709,48 @@ class StudentInformationSystem(QMainWindow):
             column_alignments={0: Qt.AlignmentFlag.AlignCenter}
         )
 
-    def filter_table(self, table_widget, search_bar):
+    def filter_table(self, table_widget, search_bar, search_by_combo):
         search_text = search_bar.text().lower()
+        search_by = search_by_combo.currentText().lower()
+
         for row in range(table_widget.rowCount()):
             match = False
             for col in range(table_widget.columnCount()):
                 item = table_widget.item(row, col)
-                if item and search_text in item.text().lower():
-                    match = True
-                    break
+                if item:
+                    header_text = table_widget.horizontalHeaderItem(col).text().lower()
+                    if search_by == "gender" and header_text == "gender":
+                        if search_text in item.text().lower():
+                            match = True
+                            break
+                    elif search_by == "all" or header_text == search_by:
+                        if search_text in item.text().lower():
+                            match = True
+                            break
             table_widget.setRowHidden(row, not match)
 
     def filter_student_table(self):
-        self.filter_table(self.student_table, self.student_search_bar)
+        self.filter_table(self.student_table, self.student_search_bar, self.search_by_label)
 
     def filter_program_table(self):
-        self.filter_table(self.program_table, self.program_search_bar)
+        self.filter_table(self.program_table, self.program_search_bar, self.search_by_label)
 
     def filter_college_table(self):
-        self.filter_table(self.college_table, self.college_search_bar)
+        self.filter_table(self.college_table, self.college_search_bar, self.search_by_label)
 
     def clear_student_search(self):
         self.student_search_bar.clear()
+        self.search_by_label.setCurrentIndex(0)  
         self.filter_student_table()
 
     def clear_program_search(self):
         self.program_search_bar.clear()
+        self.search_by_label.setCurrentIndex(0)  
         self.filter_program_table()
 
     def clear_college_search(self):
         self.college_search_bar.clear()
+        self.search_by_label.setCurrentIndex(0)
         self.filter_college_table()
 
     def open_add_student_dialog(self):

@@ -176,3 +176,14 @@ QHeaderView::section {
     padding: 8px;
     border: 1px solid #1E1E1E;
 }
+
+QComboBox#searchByLabel {
+    background-color: #181818;
+    color: white;
+    border-radius: 15px;
+    padding: 8px 15px;
+    border: 2px solid #008000;
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
