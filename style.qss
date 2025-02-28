@@ -1,0 +1,189 @@
+QMainWindow {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212; /* Background color */
+}
+
+QPushButton#clearStudentSearchButton,
+QPushButton#clearProgramSearchButton,
+QPushButton#clearCollegeSearchButton {
+    border: none;
+    /* background-image: url('icons/clear.png');
+    background-position: center;*/
+    background-color: transparent; 
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+QPushButton#saveButton {
+    background-color: #00a900;  /* Darker green */
+    color: #FFFFFF;
+    border-radius: 8px;
+    /* padding-top: 8px;
+    padding-bottom: 8px; */
+    margin-top: 10px;
+}
+
+QPushButton#addStudentButton,
+QPushButton#editStudentButton,
+QPushButton#deleteStudentButton,
+QPushButton#refreshStudentButton,
+QPushButton#addProgramButton,
+QPushButton#editProgramButton,
+QPushButton#deleteProgramButton,
+QPushButton#refreshProgramButton,
+QPushButton#addCollegeButton,
+QPushButton#editCollegeButton,
+QPushButton#deleteCollegeButton,
+QPushButton#refreshCollegeButton {
+    background-color: #006400;  /* Darker green */
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 8px;
+    font-weight: bold;
+    border: 1px solid #008000;
+}
+
+QPushButton#addStudentButton:hover,
+QPushButton#editStudentButton:hover,
+QPushButton#deleteStudentButton:hover,
+QPushButton#refreshStudentButton:hover,
+QPushButton#addProgramButton:hover,
+QPushButton#editProgramButton:hover,
+QPushButton#deleteProgramButton:hover,
+QPushButton#refreshProgramButton:hover,
+QPushButton#addCollegeButton:hover,
+QPushButton#editCollegeButton:hover,
+QPushButton#deleteCollegeButton:hover,
+QPushButton#refreshCollegeButton:hover {
+    background-color: #009900;
+    border: 1px solid #00cc00;
+}
+
+QPushButton:pressed {
+    background-color: #004d00;
+}
+
+QPushButton:disabled {
+    background-color: #E0E0E0; /* Disabled background color */
+    color: #9E9E9E; /* Disabled text color */
+}
+
+QLineEdit#idNumber,
+QLineEdit#firstName,
+QLineEdit#lastName,
+QLineEdit#programCodeLine,
+QLineEdit#programNameLine,
+QLineEdit#collegeCodeLine,
+QLineEdit#collegeNameLine {
+    background-color: #181818;
+    color: white;
+    border-radius: 15px;
+    border: 2px solid #292929;
+}
+
+QLineEdit#studentSearchBar,
+QLineEdit#programSearchBar,
+QLineEdit#collegeSearchBar {
+    background-color: #181818;
+    color: white;
+    border-radius: 15px;
+    padding: 8px 15px;
+    border: 2px solid #008000;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+QLineEdit#studentSearchBar:focus,
+QLineEdit#programSearchBar:focus,
+QLineEdit#collegeSearchBar:focus {
+    border: 2px solid #00cc00;
+    background-color: #202020;
+}
+
+QTabWidget::pane {
+    border: 1px solid #121212; /* Border around the tab widget */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #121212; /* Background color */
+}
+
+QTabBar::tab {
+    background-color: #121212;
+    color: white;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+}
+
+QTabBar::tab:selected {
+    background: #121212; /* Background color of selected tab */
+    color: #FFFFFF; /* Text color of selected tab */
+    border-bottom: 5px solid #1c652a;
+    border-radius: none;
+}
+
+QTabBar::tab:hover {
+    background: #1c652a; /* Background color of hovered tab */
+    color: #FFFFFF; /* Text color of hovered tab */
+}
+
+QTabBar::tab:!selected {
+    background: #121212; /* Background color of unselected tabs */
+    color: #FFFFFF; /* Text color of unselected tabs */
+}
+
+QTabBar::tab:!selected:hover {
+    background: #121212; /* Background color of hovered unselected tabs */
+    color: #FFFFFF; /* Text color of hovered unselected tabs */
+    border-bottom: 2px solid #1c652a;
+    border-radius: none;
+}
+
+QTableWidget {
+    background-color: #121212;
+    color: #E0E0E0;
+    border: 1px solid #121212;
+    gridline-color: #121212;
+    selection-background-color: #005500; /* Background color for selected rows */
+    selection-color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+/* Remove the focus rectangle for selected cells */
+QTableWidget::item:focus {
+    outline: none; /* Remove the focus rectangle */
+    border: none; /* Remove any border */
+}
+
+/* Style for selected rows */
+QTableWidget::item:selected {
+    background-color: #005500; /* Background color for selected rows */
+    color: #FFFFFF; /* Text color for selected rows */
+    border: none; /* Remove any border */
+}
+
+/* Ensure the entire row is selected */
+QTableWidget::item {
+    selection-background-color: #005500; /* Background color for selected rows */
+    selection-color: #FFFFFF; /* Text color for selected rows */
+}
+
+QHeaderView::section {
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 8px;
+    border: 1px solid #1E1E1E;
+}
+
+QComboBox#searchByLabel {
+    background-color: #181818;
+    color: white;
+    border-radius: 15px;
+    padding: 8px 15px;
+    border: 2px solid #008000;
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}

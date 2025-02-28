@@ -1,0 +1,47 @@
+# Bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+/ssis_env
+venv/
+.env/
+*.venv/
+
+# Qt Designer files and cache
+*.pyc
+*.qmake.stash
+*.qmake.cache
+
+# UI Compiled Python files (if you're generating Python from .ui files)
+*.ui.py
+*.qrc.py
+
+# Logs and temp files
+*.log
+*.bak
+*.swp
+*.swo
+
+# Build artifacts
+build/
+dist/
+*.spec
+
+# IDE/editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebook checkpoints (if using Jupyter)
+.ipynb_checkpoints/
+
+# CSV or database files (if storing data locally)
+data/*.csv
+data/*.db
+data/*.sqlite
+data/*.json
+theme.qss
