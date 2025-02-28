@@ -168,8 +168,11 @@ class AddEditProgramDialog(QDialog):
         self.college.setFixedWidth(75)
 
         # Populate College dropdown with valid codes from College.csv
-        valid_college_codes = ["CCS", "COE", "CASS", "CED", "CSM", "CEBA"]
-        self.college.addItems(valid_college_codes)
+        try:
+            colleges = list_colleges()
+            self.college.addItems(colleges['Code'].tolist())
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to load colleges: {e}")
 
         layout.addRow("Program code:", self.code)
         layout.addRow("Name:", self.name)
@@ -212,6 +215,15 @@ class AddEditProgramDialog(QDialog):
             colleges = list_colleges()
             if college not in colleges['Code'].values:
                 QMessageBox.warning(self, "Invalid College Code", f"College Code '{college}' does not exist in the Colleges table.")
+                return
+            
+            # Check if Program Code and Name already exists
+            programs = list_programs()
+            if code in programs['Code'].values and (not self.program_data or self.program_data['Code'] != code):
+                QMessageBox.warning(self, "Duplicate Code", f"A program with the Code '{code}' already exists.")
+                return
+            if name in programs['Name'].values and (not self.program_data or self.program_data['Name'] != name):
+                QMessageBox.warning(self, "Duplicate Name", f"A program with the Name '{name}' already exists.")
                 return
 
             # Prepare program data
@@ -565,6 +577,46 @@ class StudentInformationSystem(QMainWindow):
 
         self.refresh_college_table()
 
+    def delete_confirm(self, message):
+        delete_confirmation = QMessageBox.question(self, f"Delete {message}", f"Are you sure you want to delete the selected {message}?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+
+    def delete_students(self):
+        selected_rows = self.student_table.selectionModel().selectedRows()
+        delete_confirmation = self.delete_confirm("students")
+        if delete_confirmation == QMessageBox.StandardButton.Yes and selected_rows:
+            try:
+                for index in sorted(selected_rows):
+                    student_id = self.student_table.item(index.row(), 0).text()
+                    delete_student(student_id)
+                self.refresh_student_table()
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to delete students: {e}")
+
+    def delete_program(self):
+        selected_row = self.program_table.currentRow()
+        delete_confirmation = self.delete_confirm("program")
+
+        if delete_confirmation == QMessageBox.StandardButton.Yes and selected_row >= 0:
+            try:
+                program_code = self.program_table.item(selected_row, 0).text()
+                delete_program(program_code)
+                self.refresh_program_table()
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to delete program: {e}") 
+
+    def delete_college(self):
+        selected_row = self.college_table.currentRow()
+        delete_confirmation = self.delete_confirm("college")
+
+        if delete_confirmation == QMessageBox.StandardButton.Yes and selected_row >= 0:
+            try:
+                college_code = self.college_table.item(selected_row, 0).text()
+                delete_college(college_code)
+                self.refresh_college_table()
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to delete college: {e}")     
+
+
     def refresh_table(self, table_widget, list_function, search_bar, column_alignments=None):
         try:
             # Disable sorting before refreshing (fixed a bug)
@@ -689,17 +741,6 @@ class StudentInformationSystem(QMainWindow):
         else:
             QMessageBox.warning(self, "No Selection", "Please select a student to edit.")
 
-    def delete_students(self):
-        selected_rows = self.student_table.selectionModel().selectedRows()
-        if selected_rows:
-            try:
-                for index in sorted(selected_rows):
-                    student_id = self.student_table.item(index.row(), 0).text()
-                    delete_student(student_id)
-                self.refresh_student_table()
-            except Exception as e:
-                QMessageBox.critical(self, "Error", f"Failed to delete students: {e}")
-        
     def open_add_program_dialog(self):
         dialog = AddEditProgramDialog(self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
@@ -724,15 +765,7 @@ class StudentInformationSystem(QMainWindow):
         else:
             QMessageBox.warning(self, "No Selection", "Please select a program to edit.")        
                 
-    def delete_program(self):
-        selected_row = self.program_table.currentRow()
-        if selected_row >= 0:
-            try:
-                program_code = self.program_table.item(selected_row, 0).text()
-                delete_program(program_code)
-                self.refresh_program_table()
-            except Exception as e:
-                QMessageBox.critical(self, "Error", f"Failed to delete program: {e}") 
+    
                             
     def open_add_college_dialog(self):
         dialog = AddEditCollegeDialog(self)
@@ -756,16 +789,7 @@ class StudentInformationSystem(QMainWindow):
                 QMessageBox.critical(self, "Error", f"Failed to edit college: {e}")
         else:
             QMessageBox.warning(self, "No Selection", "Please select a college to edit.")             
-                
-    def delete_college(self):
-        selected_row = self.college_table.currentRow()
-        if selected_row >= 0:
-            try:
-                college_code = self.college_table.item(selected_row, 0).text()
-                delete_college(college_code)
-                self.refresh_college_table()
-            except Exception as e:
-                QMessageBox.critical(self, "Error", f"Failed to delete college: {e}")             
+                        
 
 def load_stylesheet(filename):
     """Load a CSS stylesheet from a file."""

@@ -1,170 +1,57 @@
 ID Number,First Name,Last Name,Year Level,Gender,Program Code
-2024-7668,Isaac,Sanders,3,Male,BSGES
+2024-7668,Isaac,Sanders,3,Male,BSGE
 2024-7222,Liam,Bryant,4,Female,BSBA-HRM
-2022-1099,Oliver,Jordan,4,Others,BS EnvSci
-2023-4015,Zoe,Mitchell,2,Male,BS Bio
-2022-7409,Liam,Jackson,4,Others,BS Math
-2021-5769,Violet,Gonzalez,3,Others,BSEd-Sci
-2021-5983,Abigail,Martinez,4,Others,BS Biotech
+2022-1099,Oliver,Jordan,4,Others,BS ENVSCI
+2023-4015,Zoe,Mitchell,2,Male,BS BIO
+2022-7409,Liam,Jackson,4,Others,BS MATH
+2021-5769,Violet,Gonzalez,3,Others,BSED-SCI
+2021-5983,Abigail,Martinez,4,Others,BS BIOTECH
 2022-9034,Owen,Sanchez,1,Female,BS AI
-2023-2545,Stella,Myers,2,Female,BS Biotech
+2023-2545,Stella,Myers,2,Female,BS BIOTECH
 2022-8117,Lillian,Cox,3,Others,BSBA-IB
-2023-4805,Nathan,Wright,1,Others,BS Accountancy
+2023-4805,Nathan,Wright,1,Others,BSA
 2024-2112,Theodore,Harris,1,Male,BSECE
-2023-8681,Adam,Young,3,Others,BS Radiology
+2023-8681,Adam,Young,3,Others,BS RADIOLOGY
 2021-8637,Julian,Allen,3,Others,BSBA-HRM
-2023-2573,Evelyn,Morris,4,Others,BS CyberSec
+2023-2573,Evelyn,Morris,4,Others,BS CYBERSEC
 2023-7933,Charles,Harris,3,Others,BSCE
-2024-6196,Eva,Long,4,Male,BA Phil
-2021-7312,John,Bailey,2,Others,BSDent
+2024-6196,Eva,Long,4,Male,BA PHIL
+2021-7312,John,Bailey,2,Others,BSDENT
 2023-8364,Ethan,Gomez,4,Female,BSBA-OM
 2023-2493,Easton,Mendoza,1,Male,BSBA-FM
 2022-3830,Claire,Bailey,1,Female,BSBA-OM
 2024-1232,Wyatt,Diaz,4,Male,BSBA-HRM
-2021-5504,Riley,Montgomery,1,Others,BS Entrepreneurship
-2023-5683,Caleb,Ortiz,4,Others,BSChE
-2024-2705,Layla,Ward,1,Male,BS Psych
+2021-5504,Riley,Montgomery,1,Others,BS ENTREPRENEURSHIP
+2023-5683,Caleb,Ortiz,4,Others,BSCHE
+2024-2705,Layla,Ward,1,Male,BS PSYCH
 2024-1404,Elijah,Torres,4,Others,BTLED-HE
-2024-2009,Landon,Mendoza,4,Others,BPharm
-2022-2576,Daniel,Scott,3,Female,BS Radiology
-2022-9298,John,Collins,2,Male,BSEd-Fil
-2021-5877,Samuel,Alvarez,4,Female,BS GameDev
-2022-3608,Adrian,Roberts,2,Male,BA DevCom
-2023-2843,Lily,Ray,1,Others,BS Marine Bio
-2023-4043,Riley,Webb,1,Others,BS Biotech
-2021-8868,Adrian,Hughes,3,Others,BA Phil
+2024-2009,Landon,Mendoza,4,Others,BPHARM
+2022-2576,Daniel,Scott,3,Female,BS RADIOLOGY
+2022-9298,John,Collins,2,Male,BSED-FIL
+2021-5877,Samuel,Alvarez,4,Female,BS GAMEDEV
+2022-3608,Adrian,Roberts,2,Male,BA DEVCOM
+2023-2843,Lily,Ray,1,Others,BS MARINE BIO
+2023-4043,Riley,Webb,1,Others,BS BIOTECH
+2021-8868,Adrian,Hughes,3,Others,BA PHIL
 2024-4425,Charlotte,Young,3,Female,BS AI
-2022-1330,Lillian,Green,4,Others,BA Eng
-2021-9651,Wyatt,Smith,3,Male,BS Geology
+2022-1330,Lillian,Green,4,Others,BA ENG
+2021-9651,Wyatt,Smith,3,Male,BS GEOLOGY
 2024-9514,Jaxon,Fisher,2,Female,BSBA-OM
-2024-3885,Adam,Brown,1,Female,BS DataSci
-2023-6303,Lily,Smith,2,Male,BS Econ
-2024-5894,Aurora,Bennet,1,Others,BA SocSci
+2024-3885,Adam,Brown,1,Female,BS DATASCI
+2023-6303,Lily,Smith,2,Male,BS ECON
+2024-5894,Aurora,Bennet,1,Others,BA SOCSCI
 2024-6893,Alice,Myers,3,Others,BSCS
-2023-3337,Leah,Perez,4,Male,BA SocSci
-2022-5483,James,McDonald,1,Male,BS Finance
-2022-1211,Zoe,Flores,3,Male,BS Geology
+2023-3337,Leah,Perez,4,Male,BA SOCSCI
+2022-5483,James,McDonald,1,Male,BS FINANCE
+2022-1211,Zoe,Flores,3,Male,BS GEOLOGY
 2022-8804,Nathan,Lopez,1,Others,BS AI
-2022-4687,Lucy,Ward,1,Others,BS Econ
+2022-4687,Lucy,Ward,1,Others,BS ECON
 2021-6236,Zoe,Patel,2,Others,BSBA-HRM
-2021-1175,Stella,Scott,1,Others,BS Entrepreneurship
-2024-7587,Sebastian,Graham,4,Male,BS AeroEng
-2021-1071,William,Harrison,2,Female,BSEd-Eng
-2024-1353,Luke,Jackson,1,Others,BS Bio
-2021-9467,Alexander,Harris,4,Male,BS Psych
+2021-1175,Stella,Scott,1,Others,BS ENTREPRENEURSHIP
+2024-7587,Sebastian,Graham,4,Male,BS AEROENG
+2021-1071,William,Harrison,2,Female,BSED-ENG
+2024-1353,Luke,Jackson,1,Others,BS BIO
+2021-9467,Alexander,Harris,4,Male,BS PSYCH
 2023-4099,Owen,Rodriguez,3,Male,BSBA-FM
-2021-5717,Nora,Gray,3,Female,BA Phil
+2021-5717,Nora,Gray,3,Female,BA PHIL
 2021-3991,Hazel,Campbell,4,Male,BSECE
-2021-2000,Grace,Garcia,1,Others,BTLED-IA
-2022-7125,Amelia,Jones,4,Female,BSEd-PE
-2024-1116,Everly,Montgomery,3,Others,BTLED-HE
-2022-3637,Bella,Jackson,4,Male,BA Journ
-2024-1992,Eva,Cooper,3,Others,BSBA-FM
-2024-1116,Gabriel,Adams,1,Male,BSBA-MM
-2023-9109,Valentina,Gomez,2,Female,BS AeroEng
-2024-7417,Brooklyn,Phillips,4,Others,BPharm
-2023-2868,David,Smith,3,Others,BS Public Ad
-2023-1651,Anthony,Roberts,2,Male,BS AeroEng
-2023-5451,Christian,Cruz,3,Male,BSEd-PE
-2024-7243,Leo,Brown,4,Male,BSEd-Eng
-2024-5065,Sadie,Patel,4,Others,BS Bio
-2022-7728,Autumn,Webb,4,Male,BSEd-PE
-2024-5420,Isaac,Jordan,3,Female,BSECE
-2023-3726,Chloe,Reyes,4,Others,BS Radiology
-2024-7567,Connor,Castillo,2,Others,BSCE
-2021-1883,David,McDonald,3,Female,BS AI
-2022-9027,Melody,Reyes,2,Female,BSDent
-2023-1637,Everly,Brown,1,Male,BS Geology
-2021-4024,Aaliyah,Sanders,2,Others,BA Hist
-2022-9636,Autumn,Webb,3,Others,BA Comm
-2021-6260,Oliver,Jones,3,Female,BSDent
-2022-3291,Landon,Murphy,2,Others,BSBA-HRM
-2022-6472,Nathan,Lewis,3,Others,BS Chem
-2022-4380,Benjamin,Henderson,4,Male,BS EnvSci
-2021-6732,Violet,Gonzalez,2,Others,BS Public Ad
-2023-8251,Julian,Franklin,1,Others,BS Public Ad
-2024-6285,David,Marshall,2,Others,BS DataSci
-2022-2497,Mia,Adams,3,Female,BS Econ
-2022-4952,Hailey,Carter,2,Others,BSChE
-2024-5428,Kennedy,Murphy,2,Others,BA SocSci
-2022-9392,Autumn,Campbell,4,Male,BSBA-HRM
-2024-9926,Adrian,Reed,2,Male,BSECE
-2021-7491,Aaron,Brown,2,Others,BSBA-HRM
-2022-4399,Evelyn,Wilson,3,Others,BSDA
-2024-2750,Emma,Ramirez,4,Others,BSSE
-2021-1867,Henry,Parker,4,Female,BPharm
-2021-2953,Isaiah,Rogers,3,Male,BA DevCom
-2022-7810,Chloe,Garcia,1,Male,BA Journ
-2024-9905,Lily,Gonzalez,4,Male,BSCE
-2023-4671,Riley,Cox,3,Male,BSEd-Fil
-2022-8319,Kennedy,Carter,2,Others,BSBA-OM
-2022-2443,Ella,Turner,3,Male,BS DataSci
-2023-5584,Stella,Ortiz,3,Female,BSBA-IB
-2024-4674,Cameron,Jenkins,1,Male,BSEd-Fil
-2024-8807,David,Sanders,4,Male,BTLED-IA
-2021-3486,Valentina,Taylor,2,Female,BS Biotech
-2024-7270,Oliver,Elliott,3,Others,BA Comm
-2022-7816,Zoe,Johnson,1,Male,BSBA-HRM
-2022-2876,Scarlett,Adams,1,Others,BA Eng
-2021-6631,Everly,Anderson,4,Male,BS Psych
-2022-9698,Anthony,Ortiz,1,Others,BSCS
-2021-6672,Grace,Cook,4,Female,BSBA-MM
-2022-9466,Josiah,Gray,3,Male,BS Applied Physics
-2023-4059,Isabella,Lewis,2,Others,BS Marine Bio
-2021-3973,Scarlett,Price,4,Others,BTLED-IA
-2022-1515,Amelia,Webb,3,Others,BS CyberSec
-2022-3124,Michael,Diaz,2,Male,BS Public Ad
-2022-2596,Ezekiel,Ramos,3,Male,BS DataSci
-2022-8972,Zoe,Medina,3,Female,BSBA-FM
-2022-6635,Thomas,Phillips,3,Others,BSDent
-2022-8990,Elijah,Brooks,1,Male,BS NavalEng
-2024-5729,Robert,Richardson,2,Male,BS Applied Physics
-2022-7780,Theodore,Hernandez,2,Female,BA IR
-2021-6338,Michael,Graham,1,Male,BSBA-IB
-2022-8113,Matthew,Gray,4,Others,BSECE
-2021-8097,Savannah,Clark,1,Others,BSChE
-2021-7966,Thomas,Morris,4,Others,BA DevCom
-2024-4428,Nora,Phillips,4,Female,BS Entrepreneurship
-2024-1251,Eva,Montgomery,2,Male,BS Stat
-2021-9894,Landon,James,2,Others,BS Radiology
-2024-6666,Lucas,Davis,4,Female,BSBA-MM
-2021-5517,Naomi,Franklin,2,Female,BSChE
-2023-4402,Lillian,Taylor,1,Others,BS Stat
-2023-7226,Sebastian,Adams,3,Others,BSBA-OM
-2021-1366,Grace,Cunningham,3,Male,BA Phil
-2021-8346,Aiden,Williams,3,Female,BS Applied Physics
-2021-7953,Paisley,Green,2,Female,BS Biotech
-2022-5783,Chloe,Gordon,2,Male,BS Geology
-2021-5599,Harper,Edwards,1,Male,BTLED-HE
-2022-4166,Aaron,Graham,4,Male,BS Public Ad
-2021-2639,Scarlett,Bailey,1,Female,BS Econ
-2023-5256,Autumn,Bailey,4,Others,BSEd-Eng
-2021-4280,Thomas,Stewart,2,Others,BSChE
-2023-8141,Amelia,Chavez,3,Male,BS Chem
-2024-5215,Matthew,Robinson,2,Others,BS CyberSec
-2023-7883,Lucy,Williams,2,Others,BSBA-HRM
-2022-8770,Matthew,Mitchell,2,Male,BSDA
-2023-7111,Wyatt,Cook,2,Female,BS Finance
-2024-6514,Ethan,Miller,3,Others,BA Eng
-2022-9066,Ella,Adams,4,Others,BS CyberSec
-2024-7916,Hudson,Campbell,2,Others,BSEd-PE
-2024-9119,Brayden,Silva,1,Others,BS Radiology
-2023-1708,Amelia,Fisher,3,Others,BS AeroEng
-2024-9180,Melody,White,1,Male,BA Hist
-2021-3892,Adam,Brooks,2,Others,BS Chem
-2024-3291,John,Rogers,2,Male,BSChE
-2023-5252,Maya,McDonald,4,Male,BA Comm
-2022-8885,Ella,Cooper,3,Female,BS Econ
-2021-7338,Thomas,Cunningham,3,Male,BS Econ
-2023-6236,Charlotte,Cook,2,Others,BTLED-IA
-2023-8995,Andrew,Ramirez,1,Female,BA DevCom
-2021-8905,Henry,Montgomery,2,Female,BSDA
-2023-7597,Lucy,Hall,4,Female,BA SocSci
-2021-1524,Amelia,Collins,1,Female,BSEd-Math
-2005-0423,Wakin,Sallador,2,Male,BSCS
-2024-0123,King,Kong,1,Male,BSEd-Fil
-2021-2023,Juhanara,Aranahuj,4,Female,BSDA
-2019-0031,My Little,Pony,4,Female,BSDent
-2025-9999,Sabrina,Carpenter,3,Female,BSCE
-2001-1111,Rene,Saluta,4,Male,BTLED-IA
-2001-2001,Peter,Griffin,2,Male,BSIT

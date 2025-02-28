@@ -1,69 +1,79 @@
 Code,Name,College
 BTLED-HE,Bachelor of Technology and Livelihood Education - Home Economics,CED
-BTLED-IAa,Bachelor of Technology and Livelihood Education - Industrial Arts,CED
-BSEd-Eng,Bachelor of Secondary Education - English,CED
-BSEd-Math,Bachelor of Secondary Education - Mathematics,CED
-BSEd-Sci,Bachelor of Secondary Education - Science,CED
-BSEd-Fil,Bachelor of Secondary Education - Filipino,CED
-BSEd-SocSci,Bachelor of Secondary Education - Social Science,CED
-BSEd-PE,Bachelor of Secondary Education - Physical Education,CED
-BS Psych,Bachelor of Science in Psychology,CASS
-BA SocSci,Bachelor of Arts in Social Science,CASS
-BA Comm,Bachelor of Arts in Communication,CASS
-BA Hist,Bachelor of Arts in History,CASS
-BA Phil,Bachelor of Arts in Philosophy,CASS
-BA Eng,Bachelor of Arts in English,CASS
-BA Filipino,Bachelor of Arts in Filipino,CASS
+BTLED-IAA,Bachelor of Technology and Livelihood Education - Industrial Arts,CED
+BSED-ENG,Bachelor of Secondary Education - English,CED
+BSED-MATH,Bachelor of Secondary Education - Mathematics,CED
+BSED-SCI,Bachelor of Secondary Education - Science,CED
+BSED-FIL,Bachelor of Secondary Education - Filipino,CED
+BSED-SOCSCI,Bachelor of Secondary Education - Social Science,CED
+BSED-PE,Bachelor of Secondary Education - Physical Education,CED
+BS PSYCH,Bachelor of Science in Psychology,CASS
+BA SOCSCI,Bachelor of Arts in Social Science,CASS
+BA COMM,Bachelor of Arts in Communication,CASS
+BA HIST,Bachelor of Arts in History,CASS
+BA PHIL,Bachelor of Arts in Philosophy,CASS
+BA ENG,Bachelor of Arts in English,CASS
+BA FILIPINO,Bachelor of Arts in Filipino,CASS
 BA IR,Bachelor of Arts in International Relations,CASS
-BA DevCom,Bachelor of Arts in Development Communication,CASS
-BA Journ,Bachelor of Arts in Journalism,CASS
-BS Math,Bachelor of Science in Mathematics,CSM
-BS Bio,Bachelor of Science in Biology,CSM
-BS Chem,Bachelor of Science in Chemistry,CSM
-BS EnvSci,Bachelor of Science in Environmental Science,CSM
-BS Stat,Bachelor of Science in Statistics,CSM
-BS Applied Physics,Bachelor of Science in Applied Physics,CSM
-BS Marine Bio,Bachelor of Science in Marine Biology,CSM
-BS Geology,Bachelor of Science in Geology,CSM
-BS Forensic Sci,Bachelor of Science in Forensic Science,CSM
-BS Biotech,Bachelor of Science in Biotechnology,CSM
+BA DEVCOM,Bachelor of Arts in Development Communication,CASS
+BA JOURN,Bachelor of Arts in Journalism,CASS
+BS MATH,Bachelor of Science in Mathematics,CSM
+BS BIO,Bachelor of Science in Biology,CSM
+BS CHEM,Bachelor of Science in Chemistry,CSM
+BS ENVSCI,Bachelor of Science in Environmental Science,CSM
+BS STAT,Bachelor of Science in Statistics,CSM
+BS APPLIED PHYSICS,Bachelor of Science in Applied Physics,CSM
+BS MARINE BIO,Bachelor of Science in Marine Biology,CSM
+BS GEOLOGY,Bachelor of Science in Geology,CSM
+BS FORENSIC SCI,Bachelor of Science in Forensic Science,CSM
+BS BIOTECH,Bachelor of Science in Biotechnology,CSM
 BSCE,Bachelor of Science in Civil Engineering,COE
 BSEE,Bachelor of Science in Electrical Engineering,COE
 BSME,Bachelor of Science in Mechanical Engineering,COE
-BSChE,Bachelor of Science in Chemical Engineering,COE
+BSCHE,Bachelor of Science in Chemical Engineering,COE
 BSIE,Bachelor of Science in Industrial Engineering,COE
 BSECE,Bachelor of Science in Electronics and Communications Engineering,COE
 BSRE,Bachelor of Science in Renewable Energy Engineering,COE
-BSGES,Bachelor of Science in Geodetic Engineering,COE
-BS AeroEng,Bachelor of Science in Aerospace Engineering,COE
-BS NavalEng,Bachelor of Science in Naval Engineering,COE
+BSGE,Bachelor of Science in Geodetic Engineering,COE
+BS AEROENG,Bachelor of Science in Aerospace Engineering,COE
+BS NAVALENG,Bachelor of Science in Naval Engineering,COE
 BSCS,Bachelor of Science in Computer Science,CCS
 BSIT,Bachelor of Science in Information Technology,CCS
 BSIS,Bachelor of Science in Information Systems,CCS
 BSEMC,Bachelor of Science in Entertainment and Multimedia Computing,CCS
 BSDA,Bachelor of Science in Data Analytics,CCS
-BS CyberSec,Bachelor of Science in Cybersecurity,CCS
+BS CYBERSEC,Bachelor of Science in Cybersecurity,CCS
 BS AI,Bachelor of Science in Artificial Intelligence,CCS
 BSSE,Bachelor of Science in Software Engineering,CCS
-BS DataSci,Bachelor of Science in Data Science,CCS
+BS DATASCI,Bachelor of Science in Data Science,CCS
 BSGDS,Bachelor of Science in Game Development,CCS
 BSBA-FM,Bachelor of Science in Business Administration - Financial Management,CEBA
 BSBA-MM,Bachelor of Science in Business Administration - Marketing Management,CEBA
 BSBA-HRM,Bachelor of Science in Business Administration - Human Resource Management,CEBA
-BS Accountancy,Bachelor of Science in Accountancy,CEBA
-BS Entrepreneurship,Bachelor of Science in Entrepreneurship,CEBA
+BSA,Bachelor of Science in Accountancy,CEBA
+BS ENTREPRENEURSHIP,Bachelor of Science in Entrepreneurship,CEBA
 BSBA-OM,Bachelor of Science in Business Administration - Operations Management,CEBA
 BSBA-IB,Bachelor of Science in Business Administration - International Business,CEBA
-BS Econ,Bachelor of Science in Economics,CEBA
-BS Finance,Bachelor of Science in Finance,CEBA
-BS Public Ad,Bachelor of Science in Public Administration,CEBA
+BS ECON,Bachelor of Science in Economics,CEBA
+BS FINANCE,Bachelor of Science in Finance,CEBA
+BS PUBLIC AD,Bachelor of Science in Public Administration,CEBA
 BSN,Bachelor of Science in Nursing,CHS
 BSPT,Bachelor of Science in Physical Therapy,CHS
 BSMLS,Bachelor of Science in Medical Laboratory Science,CHS
 BSPH,Bachelor of Science in Public Health,CHS
-BPharm,Bachelor of Science in Pharmacy,CHS
-BS Radiology,Bachelor of Science in Radiologic Technology,CHS
-BSDent,Bachelor of Science in Dentistry,CHS
+BPHARM,Bachelor of Science in Pharmacy,CHS
+BS RADIOLOGY,Bachelor of Science in Radiologic Technology,CHS
+BSDENT,Bachelor of Science in Dentistry,CHS
 BSRT,Bachelor of Science in Respiratory Therapy,CHS
-BSN Midwifery,Bachelor of Science in Nursing - Midwifery,CHS
+BSN MIDWIFERY,Bachelor of Science in Nursing - Midwifery,CHS
 BSCP,Bachelor of Science in Computer Programs,CCS
+BSN,Bachelor of Science in Nursing,CHS
+BSIT,Bachelor of Science in Information Technology,CIT
+BSCS,Bachelor of Science in Computer Science,CIT
+BFA,Bachelor of Fine Arts,CFA
+BSA,Bachelor of Science in Agriculture,CAAF
+BSF,Bachelor of Science in Fisheries,CAAF
+BALS,Bachelor of Arts in Legal Studies,CLJ
+BSPSY,Bachelor of Science in Psychology,CASS
+BSPH,Bachelor of Science in Public Health,CHS
+BSCRIM,Bachelor of Science in Criminology,CLJ
